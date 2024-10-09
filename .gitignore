@@ -1,0 +1,8 @@
+# VS and VS Code configuration
+.vscode/
+.vs/
+**.sln
+**.vcxproj*
+
+# Exes, intermediates, and GNU Makefiles
+build/
