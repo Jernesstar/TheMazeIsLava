@@ -1,3 +1,5 @@
+#include <VolcaniCore/Core/CommandLineArgs.h>
+
 #include "Game.h"
 
 Application* CreateApplication(const CommandLineArgs&) {

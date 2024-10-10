@@ -1,7 +1,6 @@
 #pragma once
 
-#include <Object/Mesh.h>
-#include <Object/Model.h>
+#include <VolcaniCore/Object/Model.h>
 
 using namespace VolcaniCore;
 

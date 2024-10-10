@@ -3,7 +3,6 @@
 #include <glm/vec2.hpp>
 
 #include <VolcaniCore/Core/Defines.h>
-
 #include <VolcaniCore/Core/Time.h>
 #include <VolcaniCore/Object/Texture.h>
 
