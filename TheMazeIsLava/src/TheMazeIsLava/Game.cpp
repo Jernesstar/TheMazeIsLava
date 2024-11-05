@@ -27,20 +27,20 @@ Game::Game()
 				Application::Close();
 		});
 
-	UI::Init();
-	GameState::Reset();
+	// UI::Init();
+	// GameState::Reset();
 
-	Asset::Init();
+	// Asset::Init();
 
-	LoadScreens();
+	// LoadScreens();
 
 	m_CurrentScreen = &HomeScreen;
 	m_CurrentScreen->OnLoad();
 }
 
 Game::~Game() {
-	GameState::Save();
-	UI::Close();
+	// GameState::Save();
+	// UI::Close();
 }
 
 void Game::OnUpdate(TimeStep ts) {
@@ -74,6 +74,7 @@ void Game::LoadScreens() {
 	home
 	->Add<UI::Text>("Press start to play", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f))
 	->SetPosition(145, 150);
+
 	// home
 	// ->Add<UI::Image>("Sandbox/assets/images/background.png")
 	// ->SetPosition(100, 100);
@@ -108,24 +109,24 @@ void Game::LoadScreens() {
 		[&]()
 		{
 			auto ui = LevelScreen.GetUI();
-			ui->Clear();
+			// ui->Clear();
 
-			float offset = 0.0f;
-			for(uint32_t i = 1; i <= GameState::Levels.size(); i++) {
-				glm::vec4 color = { 0.3125f, 0.234375f, 0.078125f, 1.0f };
-				if(i > GameState::MaxLevel)
-					color.a = 0.7f;
+			// float offset = 0.0f;
+			// for(uint32_t i = 1; i <= GameState::Levels.size(); i++) {
+			// 	glm::vec4 color = { 0.3125f, 0.234375f, 0.078125f, 1.0f };
+			// 	if(i > GameState::MaxLevel)
+			// 		color.a = 0.7f;
 
-				ui
-				->Add<UI::Button>(color, std::to_string(i))
-				->SetOnPressed(
-				[i]() {
-					if(i <= GameState::MaxLevel)
-						GameState::SelectedLevel = i;
-				})
-				->SetSize(70, 50)
-				->SetPosition(i * 70 + (offset += 40.0f), 100.0f);
-			}
+			// 	ui
+			// 	->Add<UI::Button>(color, std::to_string(i))
+			// 	->SetOnPressed(
+			// 	[i]() {
+			// 		if(i <= GameState::MaxLevel)
+			// 			GameState::SelectedLevel = i;
+			// 	})
+			// 	->SetSize(70, 50)
+			// 	->SetPosition(i * 70 + (offset += 40.0f), 100.0f);
+			// }
 		};
 
 	LevelScreen.OnUpdate =

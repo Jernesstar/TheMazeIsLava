@@ -3,7 +3,7 @@
 namespace TheMazeIsLava {
 
 void Asset::Init() {
-	std::string assetPath = "Sandbox/TheMazeIsLava/assets/";
+	std::string assetPath = "TheMazeIsLava/TheMazeIsLava/assets/";
 
 	auto tex = Texture::Create(assetPath + "images/stone.png");
 	auto tex2 = Texture::Create(assetPath + "images/lava.png");
