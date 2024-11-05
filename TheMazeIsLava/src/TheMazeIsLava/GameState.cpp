@@ -42,8 +42,8 @@ Level LoadLevel(YAML::Node levelNode) {
 }
 
 void GameState::LoadState(bool newState) {
-	std::string path = newState ? "Sandbox/TheMazeIsLava/assets/saves/new.save"
-								: "Sandbox/TheMazeIsLava/assets/saves/game.save";
+	std::string path = newState ? "assets/saves/new.save"
+								: "assets/saves/game.save";
 	YAML::Node file;
 	try {
 		file = YAML::LoadFile(path);
@@ -91,7 +91,7 @@ void GameState::SaveState() {
 	out << YAML::EndMap; // Save
 	out << YAML::EndMap; // File
 
-	std::ofstream fout("Sandbox/TheMazeIsLava/assets/saves/game.save");
+	std::ofstream fout("TheMazeIsLava/assets/saves/game.save");
 	fout << out.c_str();
 }
 

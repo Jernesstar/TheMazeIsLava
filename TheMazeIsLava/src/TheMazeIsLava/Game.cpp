@@ -149,19 +149,19 @@ void Game::LoadScreens() {
 			auto scene = currLevel.GetScene();
 
 			auto camera = CreateRef<IsometricCamera>();
-			auto& controller = scene->GetRenderer().GetCameraController();
-			controller.SetControls(
-				MovementControls(
-					ControlMap{
-						{ Control::Up,   Key::W },
-						{ Control::Down, Key::S },
-						{ Control::Forward,  Key::Invalid },
-						{ Control::Backward, Key::Invalid },
-					})
-				);
-			controller.TranslationSpeed = 5.0f;
-			controller.RotationSpeed = 0.0f;
-			controller.SetCamera(camera);
+			// auto& controller = scene->GetRenderer()->GetCameraController();
+			// controller.SetControls(
+			// 	MovementControls(
+			// 		ControlMap{
+			// 			{ Control::Up,   Key::W },
+			// 			{ Control::Down, Key::S },
+			// 			{ Control::Forward,  Key::Invalid },
+			// 			{ Control::Backward, Key::Invalid },
+			// 		})
+			// 	);
+			// controller.TranslationSpeed = 5.0f;
+			// controller.RotationSpeed = 0.0f;
+			// controller.SetCamera(camera);
 
 			EntityBuilder(scene->EntityWorld, "MainCamera")
 			.Add<CameraComponent>()
