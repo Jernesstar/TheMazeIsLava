@@ -27,20 +27,20 @@ Game::Game()
 				Application::Close();
 		});
 
-	// UI::Init();
-	// GameState::Reset();
+	UI::Init();
+	GameState::Reset();
 
-	// Asset::Init();
+	Asset::Init();
 
-	// LoadScreens();
+	LoadScreens();
 
 	m_CurrentScreen = &HomeScreen;
 	m_CurrentScreen->OnLoad();
 }
 
 Game::~Game() {
-	// GameState::Save();
-	// UI::Close();
+	GameState::Save();
+	UI::Close();
 }
 
 void Game::OnUpdate(TimeStep ts) {
@@ -74,9 +74,8 @@ void Game::LoadScreens() {
 	home
 	->Add<UI::Text>("Press start to play", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f))
 	->SetPosition(145, 150);
-
 	// home
-	// ->Add<UI::Image>("Sandbox/assets/images/background.png")
+	// ->Add<UI::Image>("TheMazeIsLava/assets/images/background.png")
 	// ->SetPosition(100, 100);
 
 	pause
@@ -109,24 +108,25 @@ void Game::LoadScreens() {
 		[&]()
 		{
 			auto ui = LevelScreen.GetUI();
-			// ui->Clear();
+			ui->Clear();
 
-			// float offset = 0.0f;
-			// for(uint32_t i = 1; i <= GameState::Levels.size(); i++) {
-			// 	glm::vec4 color = { 0.3125f, 0.234375f, 0.078125f, 1.0f };
-			// 	if(i > GameState::MaxLevel)
-			// 		color.a = 0.7f;
+			float offset = 0.0f;
+			for(uint32_t i = 1; i <= GameState::Levels.size(); i++) {
+				glm::vec4 color = { 0.3125f, 0.234375f, 0.078125f, 1.0f };
+				if(i > GameState::MaxLevel)
+					color.a = 0.7f;
 
-			// 	ui
-			// 	->Add<UI::Button>(color, std::to_string(i))
-			// 	->SetOnPressed(
-			// 	[i]() {
-			// 		if(i <= GameState::MaxLevel)
-			// 			GameState::SelectedLevel = i;
-			// 	})
-			// 	->SetSize(70, 50)
-			// 	->SetPosition(i * 70 + (offset += 40.0f), 100.0f);
-			// }
+				ui
+				->Add<UI::Button>(color, std::to_string(i))
+				->SetOnPressed(
+					[i]()
+					{
+						if(i <= GameState::MaxLevel)
+							GameState::SelectedLevel = i;
+					})
+				->SetSize(70, 50)
+				->SetPosition(i * 70 + (offset += 40.0f), 100.0f);
+			}
 		};
 
 	LevelScreen.OnUpdate =
@@ -149,29 +149,32 @@ void Game::LoadScreens() {
 			currLevel.Load();
 			auto scene = currLevel.GetScene();
 
-			auto camera = CreateRef<IsometricCamera>();
-			// auto& controller = scene->GetRenderer()->GetCameraController();
-			// controller.SetControls(
-			// 	MovementControls(
-			// 		ControlMap{
-			// 			{ Control::Up,   Key::W },
-			// 			{ Control::Down, Key::S },
-			// 			{ Control::Forward,  Key::Invalid },
-			// 			{ Control::Backward, Key::Invalid },
-			// 		})
-			// 	);
-			// controller.TranslationSpeed = 5.0f;
-			// controller.RotationSpeed = 0.0f;
-			// controller.SetCamera(camera);
+			auto camera = CreateRef<IsometricCamera>(100.0f);
+			auto& controller = scene->GetRenderer()->GetCameraController();
+			controller.SetControls(
+				MovementControls(
+					ControlMap{
+						{ Control::Up,   Key::W },
+						{ Control::Down, Key::S },
+						{ Control::Forward,  Key::Invalid },
+						{ Control::Backward, Key::Invalid },
+					})
+				);
+			controller.TranslationSpeed = 5.0f;
+			controller.RotationSpeed = 0.0f;
+			controller.SetCamera(camera);
 
-			EntityBuilder(scene->EntityWorld, "MainCamera")
+			auto camEntity = EntityBuilder(scene->EntityWorld, "MainCamera")
 			.Add<CameraComponent>()
 			.Finalize();
+
+			camEntity.Get<CameraComponent>().Position = camera->GetPosition();
+			camEntity.Get<CameraComponent>().Direction = camera->GetDirection();
 
 			auto [x, y] = currLevel.PlayerStart;
 			Player player(scene->EntityWorld);
 			player.Get<TransformComponent>().Translation = { x, 0.0f, y };
-			player.Get<TransformComponent>().Scale = glm::vec3(2.2f);
+			player.Get<TransformComponent>().Scale = glm::vec3(0.2f);
 
 			// TODO(Implement): Collision with group
 			// PhysicsSystem::RegisterForCollisionDetection(player, m_LavaGroup);
@@ -186,15 +189,13 @@ void Game::LoadScreens() {
 			level.OnUpdate(ts);
 			level.OnRender();
 
-			if(level.GameOver) {
+			if(level.GameOver)
 				m_CurrentScreen = &OverScreen;
-			}
 			else if(level.Complete) {
 				m_CurrentScreen = &LevelScreen;
 
 				if(GameState::SelectedLevel == GameState::MaxLevel) {
 					GameState::MaxLevel++;
-
 					m_CurrentScreen->OnLoad();
 				}
 			}
@@ -202,6 +203,7 @@ void Game::LoadScreens() {
 				state.ReturnPressed = false;
 				level.Paused = true;
 				m_CurrentScreen = &PauseScreen;
+				m_CurrentScreen->OnLoad();
 			}
 		};
 

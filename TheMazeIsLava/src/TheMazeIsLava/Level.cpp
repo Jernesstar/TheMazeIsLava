@@ -1,5 +1,7 @@
 #include "Level.h"
 
+#include <VolcaniCore/Renderer/RendererAPI.h>
+
 #include <Magma/ECS/EntityBuilder.h>
 
 #include "Asset.h"
@@ -27,13 +29,16 @@ void Level::OnUpdate(TimeStep ts) {
 }
 
 void Level::OnRender() {
-	if(m_Scene)
-		m_Scene->OnRender();
+	if(!m_Scene)
+		return;
+
+	m_Scene->OnRender();
+
+	auto output = m_Scene->GetRenderer()->GetOutput();
+	RendererAPI::Get()->RenderFramebuffer(output, AttachmentTarget::Color);
 }
 
 void Level::PropagateLava(TimeStep ts) {
-	// uint32_t lavaSpeed = LavaSpeed(m_TimeSinceLevelStart);
-
 	// Propagate the lava in tile space, flow animation interpolates smoothly
 }
 

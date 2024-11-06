@@ -11,8 +11,8 @@ public:
 	float R = 10.0f;
 
 public:
-	IsometricCamera()
-		: Camera(Camera::Type::Ortho)
+	IsometricCamera(float r = 10.0f)
+		: Camera(Camera::Type::Ortho), R(r)
 	{
 		SetDistance(R);
 	}
@@ -26,6 +26,8 @@ public:
 			glm::sin(glm::radians(45.0f))
 		};
 		Direction = -glm::normalize(Position);
+		Near = 0.001f;
+		Far = 10'000.0f;
 
 		CalculateView();
 		CalculateProjection();

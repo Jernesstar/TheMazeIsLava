@@ -42,16 +42,13 @@ Level LoadLevel(YAML::Node levelNode) {
 }
 
 void GameState::LoadState(bool newState) {
-	std::string path = newState ? "TheMazeIsLava/TheMazeIsLava/assets/saves/new.save"
-								: "TheMazeIsLava/TheMazeIsLava/assets/saves/game.save";
+	std::string path = newState ? "TheMazeIsLava/assets/saves/new.save"
+								: "TheMazeIsLava/assets/saves/game.save";
 	YAML::Node file;
 	try {
 		file = YAML::LoadFile(path);
 	}
 	catch(YAML::ParserException e) {
-		return;
-	}
-	catch(YAML::BadFile e) {
 		return;
 	}
 	auto save = file["Save"];
