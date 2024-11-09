@@ -174,7 +174,7 @@ void Game::LoadScreens() {
 			auto [x, y] = currLevel.PlayerStart;
 			Player player(scene->EntityWorld);
 			player.Get<TransformComponent>().Translation = { x, 0.0f, y };
-			player.Get<TransformComponent>().Scale = glm::vec3(0.2f);
+			player.Get<TransformComponent>().Scale = glm::vec3(1.0f);
 
 			// TODO(Implement): Collision with group
 			// PhysicsSystem::RegisterForCollisionDetection(player, m_LavaGroup);
