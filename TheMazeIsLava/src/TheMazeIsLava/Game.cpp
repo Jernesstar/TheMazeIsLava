@@ -100,6 +100,7 @@ void Game::LoadScreens() {
 			if(state.ReturnPressed) {
 				state.ReturnPressed = false;
 				m_CurrentScreen = &LevelScreen;
+				GameState::SelectedLevel = 1;
 				m_CurrentScreen->OnLoad();
 			}
 		};
@@ -148,6 +149,7 @@ void Game::LoadScreens() {
 			auto& currLevel = GameState::GetLevel();
 			currLevel.Load();
 			auto scene = currLevel.GetScene();
+			Renderer.SetContext(scene.get());
 
 			auto camera = CreateRef<IsometricCamera>(100.0f);
 			auto& controller = Renderer.GetCameraController();
@@ -163,19 +165,18 @@ void Game::LoadScreens() {
 			controller.TranslationSpeed = 5.0f;
 			controller.RotationSpeed = 0.0f;
 			controller.SetCamera(camera);
+			camera->SetDistance(60.0f);
 
-			auto camEntity = EntityBuilder(scene->EntityWorld, "MainCamera")
-			.Add<CameraComponent>()
-			.Finalize();
-
-			auto cam = camEntity.Get<CameraComponent>().Cam;
-			cam->SetPosition(camera->GetPosition());
-			cam->SetDirection(camera->GetDirection());
+			scene->EntityWorld.AddEntity("MainCamera")
+			.Add<CameraComponent>(camera);
 
 			auto [x, y] = currLevel.PlayerStart;
 			Player player(scene->EntityWorld);
-			player.Get<TransformComponent>().Translation = { x, 0.0f, y };
-			player.Get<TransformComponent>().Scale = glm::vec3(1.0f);
+			player.Get<TransformComponent>() =
+				Transform
+				{
+					.Translation = { x, 5.0f, y }
+				};
 
 			// TODO(Implement): Collision with group
 			// PhysicsSystem::RegisterForCollisionDetection(player, m_LavaGroup);

@@ -11,13 +11,13 @@ public:
 	static void Init();
 
 public:
-	inline static Ref<Mesh> Wall;
-	inline static Ref<Mesh> Path;
-	inline static Ref<Mesh> Lava;
+	inline static Ref<Model> Wall;
+	inline static Ref<Model> Path;
+	inline static Ref<Model> Lava;
 
 	inline static Ref<Model> Player;
-	inline static Ref<Mesh> Torch;
-	inline static Ref<Mesh> Stairs;
+	inline static Ref<Model> Torch;
+	inline static Ref<Model> Stairs;
 };
 
 }

@@ -12,7 +12,8 @@ namespace TheMazeIsLava {
 
 class Game : public Application {
 public:
-	LevelRenderer Renderer;
+	// LevelRenderer Renderer;
+	DefaultSceneRenderer Renderer;
 
 public:
 	Game();

@@ -25,6 +25,9 @@ Level::Level(const std::string& name, const Tilemap& map)
 }
 
 void Level::OnUpdate(TimeStep ts) {
+	// auto game = (Game*)Application::Get();
+	// game->Renderer.Update(ts);
+
 	if(m_Scene)
 		m_Scene->OnUpdate(ts);
 }
@@ -48,8 +51,8 @@ void Level::TraverseTilemap(const Func<const Tile&, void>& func) {
 
 void Level::Load() {
 	m_Scene = CreateRef<Scene>(Name);
-	auto& world = m_Scene->EntityWorld;
 
+	auto& world = m_Scene->EntityWorld;
 	TraverseTilemap(
 		[&](const Tile& tile)
 		{
@@ -72,7 +75,7 @@ void Level::Load() {
 					Transform
 					{
 						.Translation = { x, 0.0f, y },
-						.Rotation = OrientPath(tile)
+						// .Rotation = OrientPath(tile)
 					})
 				.Add<MeshComponent>(Asset::Path)
 				// .Add<RigidBodyComponent>(RigidBody::Type::Static)
@@ -96,7 +99,7 @@ void Level::Load() {
 					Transform
 					{
 						.Translation = { x, 1.0f, y },
-						.Rotation = OrientStairs(tile),
+						// .Rotation = OrientStairs(tile),
 						.Scale = glm::vec3(0.5)
 					})
 				.Add<MeshComponent>(Asset::Stairs)
