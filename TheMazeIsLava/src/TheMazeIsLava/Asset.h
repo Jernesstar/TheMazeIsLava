@@ -12,9 +12,10 @@ public:
 
 public:
 	inline static Ref<Mesh> Wall;
+	inline static Ref<Mesh> Path;
 	inline static Ref<Mesh> Lava;
 
-	inline static Ref<Mesh> Player;
+	inline static Ref<Model> Player;
 	inline static Ref<Mesh> Torch;
 	inline static Ref<Mesh> Stairs;
 };

@@ -3,6 +3,7 @@
 #include <VolcaniCore/Core/Application.h>
 
 #include "Screen.h"
+#include "LevelRenderer.h"
 
 using namespace VolcaniCore;
 using namespace Magma;
@@ -10,6 +11,9 @@ using namespace Magma;
 namespace TheMazeIsLava {
 
 class Game : public Application {
+public:
+	LevelRenderer Renderer;
+
 public:
 	Game();
 	~Game();

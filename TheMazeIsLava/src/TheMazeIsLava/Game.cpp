@@ -118,12 +118,12 @@ void Game::LoadScreens() {
 
 				ui
 				->Add<UI::Button>(color, std::to_string(i))
-				->SetOnPressed(
-					[i]()
-					{
-						if(i <= GameState::MaxLevel)
-							GameState::SelectedLevel = i;
-					})
+				// ->SetOnPressed(
+				// 	[i]()
+				// 	{
+				// 		if(i <= GameState::MaxLevel)
+				// 			GameState::SelectedLevel = i;
+				// 	})
 				->SetSize(70, 50)
 				->SetPosition(i * 70 + (offset += 40.0f), 100.0f);
 			}
@@ -150,7 +150,7 @@ void Game::LoadScreens() {
 			auto scene = currLevel.GetScene();
 
 			auto camera = CreateRef<IsometricCamera>(100.0f);
-			auto& controller = scene->GetRenderer()->GetCameraController();
+			auto& controller = Renderer.GetCameraController();
 			controller.SetControls(
 				MovementControls(
 					ControlMap{
@@ -168,8 +168,9 @@ void Game::LoadScreens() {
 			.Add<CameraComponent>()
 			.Finalize();
 
-			camEntity.Get<CameraComponent>().Position = camera->GetPosition();
-			camEntity.Get<CameraComponent>().Direction = camera->GetDirection();
+			auto cam = camEntity.Get<CameraComponent>().Cam;
+			cam->SetPosition(camera->GetPosition());
+			cam->SetDirection(camera->GetDirection());
 
 			auto [x, y] = currLevel.PlayerStart;
 			Player player(scene->EntityWorld);

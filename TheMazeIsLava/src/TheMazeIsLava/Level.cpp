@@ -5,6 +5,7 @@
 #include <Magma/ECS/EntityBuilder.h>
 
 #include "Asset.h"
+#include "Game.h"
 
 using namespace Magma::ECS;
 using namespace Magma::Physics;
@@ -32,14 +33,17 @@ void Level::OnRender() {
 	if(!m_Scene)
 		return;
 
-	m_Scene->OnRender();
+	auto game = (Game*)Application::Get();
+	m_Scene->OnRender(game->Renderer);
 
-	auto output = m_Scene->GetRenderer()->GetOutput();
+	auto output = game->Renderer.GetOutput();
 	RendererAPI::Get()->RenderFramebuffer(output, AttachmentTarget::Color);
 }
 
-void Level::PropagateLava(TimeStep ts) {
-	// Propagate the lava in tile space, flow animation interpolates smoothly
+void Level::TraverseTilemap(const Func<const Tile&, void>& func) {
+	for(uint32_t i = 0; i < Height; i++)
+		for(uint32_t j = 0; j < Width; j++)
+			func(Tile(j, i));
 }
 
 void Level::Load() {
@@ -52,38 +56,47 @@ void Level::Load() {
 			auto [x, y] = tile;
 
 			if(IsWall(tile)) {
-				ECS::Entity wall = ECS::EntityBuilder(world)
+				world.BuildEntity()
 				.Add<TransformComponent>(
-					Transform{ .Translation = { x, 1.0f, y } }
-				)
+					Transform
+					{
+						.Translation = { x, 1.0f, y }
+					})
 				.Add<MeshComponent>(Asset::Wall)
 				// .Add<RigidBodyComponent>(RigidBody::Type::Static)
 				.Finalize();
 			}
-			if(IsPath(tile) || IsStart(tile)) {
-				ECS::Entity path = ECS::EntityBuilder(world)
+			else if(IsPath(tile) || IsStart(tile)) {
+				world.BuildEntity()
 				.Add<TransformComponent>(
-					Transform{ .Translation = { x, 0.0f, y } }
-				)
-				.Add<MeshComponent>(Asset::Wall)
+					Transform
+					{
+						.Translation = { x, 0.0f, y },
+						.Rotation = OrientPath(tile)
+					})
+				.Add<MeshComponent>(Asset::Path)
 				// .Add<RigidBodyComponent>(RigidBody::Type::Static)
 				// .Add<MeshComponent>(PickPathMesh(tile))
 				.Finalize();
 			}
-			if(IsLava(tile)) {
-				ECS::Entity lava = ECS::EntityBuilder(world)
+			else if(IsLava(tile)) {
+				world.BuildEntity()
 				.Add<TransformComponent>(
-					Transform{ .Translation = { x, 1.0f, y } }
-				)
+					Transform
+					{
+						.Translation = { x, 1.0f, y }
+					})
 				.Add<MeshComponent>(Asset::Lava)
 				// .Add<RigidBodyComponent>(RigidBody::Type::Static)
 				.Finalize();
 			}
-			if(IsGoal(tile)) {
-				ECS::Entity stairs = ECS::EntityBuilder(world, "Goal")
+			else if(IsGoal(tile)) {
+				world.BuildEntity("Goal")
 				.Add<TransformComponent>(
-					Transform{
+					Transform
+					{
 						.Translation = { x, 1.0f, y },
+						.Rotation = OrientStairs(tile),
 						.Scale = glm::vec3(0.5)
 					})
 				.Add<MeshComponent>(Asset::Stairs)
@@ -93,10 +106,18 @@ void Level::Load() {
 		});
 }
 
-void Level::TraverseTilemap(const Func<const Tile&, void>& func) {
-	for(uint32_t i = 0; i < Height; i++)
-		for(uint32_t j = 0; j < Width; j++)
-			func(Tile(j, i));
+glm::vec3 Level::OrientPath(const Tile& tile) {
+
+}
+
+glm::vec3 Level::OrientStairs(const Tile& tile) {
+
+}
+
+void Level::PropagateLava(TimeStep ts) {
+	// TODO(Implement): Smooth lava
+
+
 }
 
 // 0 -> Wall

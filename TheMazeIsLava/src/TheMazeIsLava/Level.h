@@ -51,10 +51,13 @@ public:
 	bool IsInbounds(const Tile& tile) const;
 
 private:
-	void PropagateLava(TimeStep ts);
+	Ref<Scene> m_Scene = nullptr;
 
 private:
-	Ref<Scene> m_Scene = nullptr;
+	void PropagateLava(TimeStep ts);
+
+	glm::vec3 OrientPath(const Tile& tile);
+	glm::vec3 OrientStairs(const Tile& tile);
 };
 
 }
