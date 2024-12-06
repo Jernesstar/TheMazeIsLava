@@ -40,7 +40,7 @@ public:
 	void Load();
 	Ref<Scene> GetScene() const { return m_Scene; }
 
-	void TraverseTilemap(const Func<const Tile&, void>& func);
+	void TraverseTilemap(const Func<void, const Tile&>& func);
 
 	bool IsWall(const Tile& tile) const;
 	bool IsPath(const Tile& tile) const;

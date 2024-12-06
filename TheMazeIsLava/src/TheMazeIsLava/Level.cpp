@@ -43,7 +43,7 @@ void Level::OnRender() {
 	RendererAPI::Get()->RenderFramebuffer(output, AttachmentTarget::Color);
 }
 
-void Level::TraverseTilemap(const Func<const Tile&, void>& func) {
+void Level::TraverseTilemap(const Func<void, const Tile&>& func) {
 	for(uint32_t i = 0; i < Height; i++)
 		for(uint32_t j = 0; j < Width; j++)
 			func(Tile(j, i));
@@ -119,7 +119,6 @@ glm::vec3 Level::OrientStairs(const Tile& tile) {
 
 void Level::PropagateLava(TimeStep ts) {
 	// TODO(Implement): Smooth lava
-
 
 }
 

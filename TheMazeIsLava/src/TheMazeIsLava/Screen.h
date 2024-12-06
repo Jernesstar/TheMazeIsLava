@@ -2,7 +2,7 @@
 
 #include <VolcaniCore/Core/Time.h>
 
-#include <Magma/UI/UI.h>
+#include <Magma/UI/UIPage.h>
 
 using namespace VolcaniCore;
 using namespace Magma;
@@ -11,28 +11,20 @@ namespace TheMazeIsLava {
 
 class Screen {
 public:
-	struct State {
-		bool ShowUI = true;
-		bool ReturnPressed = false;
-	};
-
-public:
 	std::function<void(void)> OnLoad = [](){};
 	std::function<void(TimeStep)> OnUpdate = [](TimeStep){};
-	std::function<void(Ref<UI::UIElement>)> OnPress = [](Ref<UI::UIElement>){};
 
 public:
-	Screen(Ref<UI::UIElement> ui = nullptr);
+	Screen() = default;
+	Screen(const std::string& pagePath);
 	~Screen() = default;
 
 	void OnRender();
 
-	Ref<UI::UIElement> GetUI() const { return m_UI; }
-	Screen::State& GetState() { return m_State; }
+	UI::UIPage& GetUI() { return m_UI; }
 
 private:
-	Ref<UI::UIElement> m_UI;
-	Screen::State m_State;
+	UI::UIPage m_UI;
 };
 
 }

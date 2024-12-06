@@ -28,7 +28,7 @@ Game::Game()
 				Application::Close();
 		});
 
-	UI::Init();
+	UI::UIRenderer::Init();
 	GameState::Reset();
 
 	Asset::Init();
@@ -38,7 +38,7 @@ Game::Game()
 
 Game::~Game() {
 	GameState::Save();
-	UI::Close();
+	UI::UIRenderer::Close();
 }
 
 void Game::OnUpdate(TimeStep ts) {
@@ -48,149 +48,138 @@ void Game::OnUpdate(TimeStep ts) {
 }
 
 void Game::LoadScreens() {
-	HomeScreen.OnUpdate =
-		[&](TimeStep ts)
-		{
- 			auto& state = HomeScreen.GetState();
+	// HomeScreen.OnUpdate =
+	// 	[&](TimeStep ts)
+	// 	{
+ 	// 		auto& state = HomeScreen.GetState();
 
-			if(state.ReturnPressed) {
-				state.ReturnPressed = false;
-				m_CurrentScreen = &LevelScreen;
-				GameState::SelectedLevel = 1;
-				m_CurrentScreen->OnLoad();
-			}
-		};
+	// 		if(state.ReturnPressed) {
+	// 			state.ReturnPressed = false;
+	// 			m_CurrentScreen = &LevelScreen;
+	// 			GameState::SelectedLevel = 1;
+	// 			m_CurrentScreen->OnLoad();
+	// 		}
+	// 	};
 
-	LevelScreen.OnLoad =
-		[&]()
-		{
-			auto ui = LevelScreen.GetUI();
-			ui->Clear();
+	// LevelScreen.OnLoad =
+	// 	[&]()
+	// 	{
+	// 		auto ui = LevelScreen.GetUI();
+	// 		ui->Clear();
 
-			float offset = 0.0f;
-			for(uint32_t i = 1; i <= GameState::Levels.size(); i++) {
-				glm::vec4 color = { 0.3125f, 0.234375f, 0.078125f, 1.0f };
-				if(i > GameState::MaxLevel)
-					color.a = 0.7f;
+	// 		float offset = 0.0f;
+	// 		for(uint32_t i = 1; i <= GameState::Levels.size(); i++) {
+	// 			auto& color = 
+	// 			if(i > GameState::MaxLevel)
+	// 				color.a = 0.7f;
+	// 		}
+	// 	};
 
-				ui
-				->Add<UI::Button>(color, std::to_string(i))
-				// ->SetOnPressed(
-				// 	[i]()
-				// 	{
-				// 		if(i <= GameState::MaxLevel)
-				// 			GameState::SelectedLevel = i;
-				// 	})
-				->SetSize(70, 50)
-				->SetPosition(i * 70 + (offset += 40.0f), 100.0f);
-			}
-		};
+	// LevelScreen.OnUpdate =
+	// 	[&](TimeStep _)
+	// 	{
+	// 		// TODO(Implement): Staircase like level selection
+	// 		// DrawLevelVisualizer();
 
-	LevelScreen.OnUpdate =
-		[&](TimeStep _)
-		{
-			// TODO(Implement): Staircase like level selection
-			// DrawLevelVisualizer();
+	// 		if(GameState::SelectedLevel == 0)
+	// 			return;
 
-			if(GameState::SelectedLevel == 0)
-				return;
+	// 		m_CurrentScreen = &PlayScreen;
+	// 		m_CurrentScreen->OnLoad();
+	// 	};
 
-			m_CurrentScreen = &PlayScreen;
-			m_CurrentScreen->OnLoad();
-		};
+	// PlayScreen.OnLoad =
+	// 	[&]()
+	// 	{
+	// 		auto& currLevel = GameState::GetLevel();
+	// 		currLevel.Load();
+	// 		auto scene = currLevel.GetScene();
+	// 		Renderer.SetContext(scene.get());
 
-	PlayScreen.OnLoad =
-		[&]()
-		{
-			auto& currLevel = GameState::GetLevel();
-			currLevel.Load();
-			auto scene = currLevel.GetScene();
-			Renderer.SetContext(scene.get());
+	// 		auto camera = CreateRef<IsometricCamera>(100.0f);
+	// 		auto& controller = Renderer.GetCameraController();
+	// 		controller.SetControls(
+	// 			MovementControls(
+	// 				ControlMap{
+	// 					{ Control::Up,   Key::W },
+	// 					{ Control::Down, Key::S },
+	// 					{ Control::Forward,  Key::Invalid },
+	// 					{ Control::Backward, Key::Invalid },
+	// 				})
+	// 			);
+	// 		controller.TranslationSpeed = 5.0f;
+	// 		controller.RotationSpeed = 0.0f;
+	// 		controller.SetCamera(camera);
+	// 		camera->SetDistance(60.0f);
 
-			auto camera = CreateRef<IsometricCamera>(100.0f);
-			auto& controller = Renderer.GetCameraController();
-			controller.SetControls(
-				MovementControls(
-					ControlMap{
-						{ Control::Up,   Key::W },
-						{ Control::Down, Key::S },
-						{ Control::Forward,  Key::Invalid },
-						{ Control::Backward, Key::Invalid },
-					})
-				);
-			controller.TranslationSpeed = 5.0f;
-			controller.RotationSpeed = 0.0f;
-			controller.SetCamera(camera);
-			camera->SetDistance(60.0f);
+	// 		scene->EntityWorld.AddEntity("MainCamera")
+	// 		.Add<CameraComponent>(camera);
 
-			scene->EntityWorld.AddEntity("MainCamera")
-			.Add<CameraComponent>(camera);
+	// 		auto [x, y] = currLevel.PlayerStart;
+	// 		Player player(scene->EntityWorld);
+	// 		player.Get<TransformComponent>() =
+	// 			Transform
+	// 			{
+	// 				.Translation = { x, 5.0f, y }
+	// 			};
 
-			auto [x, y] = currLevel.PlayerStart;
-			Player player(scene->EntityWorld);
-			player.Get<TransformComponent>() =
-				Transform
-				{
-					.Translation = { x, 5.0f, y }
-				};
+	// 		// TODO(Implement): Collision with group
+	// 		// PhysicsSystem::RegisterForCollisionDetection(player, m_LavaGroup);
+	// 	};
 
-			// TODO(Implement): Collision with group
-			// PhysicsSystem::RegisterForCollisionDetection(player, m_LavaGroup);
-		};
+	// PlayScreen.OnUpdate =
+	// 	[&](TimeStep ts)
+	// 	{
+	// 		auto& state = HomeScreen.GetState();
+	// 		auto& level = GameState::GetLevel();
 
-	PlayScreen.OnUpdate =
-		[&](TimeStep ts)
-		{
-			auto& state = HomeScreen.GetState();
-			auto& level = GameState::GetLevel();
+	// 		level.OnUpdate(ts);
+	// 		level.OnRender();
 
-			level.OnUpdate(ts);
-			level.OnRender();
+	// 		if(level.GameOver)
+	// 			m_CurrentScreen = &OverScreen;
+	// 		else if(level.Complete) {
+	// 			m_CurrentScreen = &LevelScreen;
 
-			if(level.GameOver)
-				m_CurrentScreen = &OverScreen;
-			else if(level.Complete) {
-				m_CurrentScreen = &LevelScreen;
+	// 			if(GameState::SelectedLevel == GameState::MaxLevel) {
+	// 				GameState::MaxLevel++;
+	// 				m_CurrentScreen->OnLoad();
+	// 			}
+	// 		}
+	// 		else if(state.ReturnPressed) {
+	// 			state.ReturnPressed = false;
+	// 			level.Paused = true;
+	// 			m_CurrentScreen = &PauseScreen;
+	// 			m_CurrentScreen->OnLoad();
+	// 		}
+	// 	};
 
-				if(GameState::SelectedLevel == GameState::MaxLevel) {
-					GameState::MaxLevel++;
-					m_CurrentScreen->OnLoad();
-				}
-			}
-			else if(state.ReturnPressed) {
-				state.ReturnPressed = false;
-				level.Paused = true;
-				m_CurrentScreen = &PauseScreen;
-				m_CurrentScreen->OnLoad();
-			}
-		};
+	// // TODO(Fix): Have Pause UI be part of the PlayScreen
+	// PauseScreen.OnUpdate =
+	// 	[&](TimeStep _)
+	// 	{
+	// 		auto& state = HomeScreen.GetState();
+	// 		auto& level = GameState::GetLevel();
 
-	// TODO(Fix): Have Pause UI be part of the PlayScreen
-	PauseScreen.OnUpdate =
-		[&](TimeStep _)
-		{
-			auto& state = HomeScreen.GetState();
-			auto& level = GameState::GetLevel();
+	// 		if(state.ReturnPressed) {
+	// 			state.ReturnPressed = false;
+	// 			level.Paused = false;
+	// 			m_CurrentScreen = &PlayScreen;
+	// 			m_CurrentScreen->OnLoad();
+	// 		}
+	// 	};
 
-			if(state.ReturnPressed) {
-				state.ReturnPressed = false;
-				level.Paused = false;
-				m_CurrentScreen = &PlayScreen;
-				m_CurrentScreen->OnLoad();
-			}
-		};
+	// OverScreen.OnUpdate =
+	// 	[&](TimeStep _)
+	// 	{
+	// 		auto& state = HomeScreen.GetState();
 
-	OverScreen.OnUpdate =
-		[&](TimeStep _)
-		{
-			auto& state = HomeScreen.GetState();
-
-			if(state.ReturnPressed) {
-				state.ReturnPressed = false;
-				m_CurrentScreen = &PlayScreen;
-				m_CurrentScreen->OnLoad();
-			}
-		};
+	// 		if(state.ReturnPressed) {
+	// 			state.ReturnPressed = false;
+	// 			m_CurrentScreen = &PlayScreen;
+	// 			m_CurrentScreen->OnLoad();
+	// 		}
+	// 	};
 }
 
 }

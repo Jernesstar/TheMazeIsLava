@@ -2,26 +2,25 @@
 
 #include <VolcaniCore/Event/Events.h>
 
+#include <Magma/UI/UIRenderer.h>
+
 namespace TheMazeIsLava {
 
-Screen::Screen(Ref<UI::UIElement> ui)
-	: m_UI(ui)
+Screen::Screen(const std::string& pagePath)
+	: m_UI(pagePath)
 {
 	Events::RegisterListener<KeyPressedEvent>(
 		[&](const KeyPressedEvent& event)
 		{
-			if(event.Key == Key::Return && !event.IsRepeat)
-				m_State.ReturnPressed = true;
+			// if(event.Key == Key::Return && !event.IsRepeat)
+			// 	m_State.ReturnPressed = true;
 		});
 }
 
 void Screen::OnRender() {
-	if(!m_UI)
-		return;
-
-	UI::Begin();
-	m_UI->Render();
-	UI::End();
+	UI::UIRenderer::BeginFrame();
+	m_UI.Render();
+	UI::UIRenderer::EndFrame();
 }
 
 }
