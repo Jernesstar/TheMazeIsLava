@@ -1,29 +1,9 @@
 {
-    "Theme":
-    {
-        "Window":
-        {
-            "Border": {
-                "Width": 0.0,
-                "Height": 0.0,
-                "Image": "assets/image/aesthetic_window_border.png"
-            },
-            "Color": [0.3, 0.4, 0.2, 0.6]
-        },
-
-        "Button": {}
-    },
-
     "Elements":
     [
         {
             "ID": "Window1",
-            "Type": "Window",
-            "Width": 200,
-            "Height": 400,
-            "x": 20,
-            "y": 20,
-            "Color": [0.3, 0.3, 0.3, 1.0]
+            "Type": "Window"
         },
         {
             "Parent": "Window1",
@@ -34,7 +14,6 @@
             "Height": 40,
             "x": 70,
             "y": 100,
-            "Color": [0.3125, 0.234375, 0.078125, 1.0],
 
             "OnClick": "@cpp{ GameState::SelectedLevel = 1 }"
         },
@@ -47,7 +26,6 @@
             "Height": 40,
             "x": 180,
             "y": 100,
-            "Color": [0.3125, 0.234375, 0.078125, 1.0],
 
             "OnClick": "@cpp{ GameState::SelectedLevel = 2 }"
         },
@@ -60,7 +38,6 @@
             "Height": 40,
             "x": 250,
             "y": 100,
-            "Color": [0.3125, 0.234375, 0.078125, 1.0],
 
             "OnClick": "@cpp{ GameState::SelectedLevel = 3 }"
         },
@@ -73,7 +50,6 @@
             "Height": 40,
             "x": 320,
             "y": 100,
-            "Color": [0.3125, 0.234375, 0.078125, 1.0],
 
             "OnClick": "@cpp{ GameState::SelectedLevel = 4 }"
         },
@@ -86,7 +62,6 @@
             "Height": 40,
             "x": 390,
             "y": 100,
-            "Color": [0.3125, 0.234375, 0.078125, 1.0],
 
             "OnClick": "@cpp{ GameState::SelectedLevel = 5 }"
         }

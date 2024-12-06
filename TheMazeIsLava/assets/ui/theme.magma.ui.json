@@ -1,0 +1,28 @@
+{
+    "Theme":
+    {
+        "Window":
+        {
+            "Width": 600,
+            "Height": 300,
+            "x": "Center",
+            "y": "Center",
+
+            "Border": {
+                "Width": 10,
+                "Height": 20,
+                "x": "Center",
+                "y": "Center",
+                "Color": [0.3125, 0.234375, 0.078125, 1.0]
+            },
+
+            "Color": [0.3, 0.4, 0.2, 0.6]
+        },
+
+        "Button": {
+            "Border": {
+                "Image": "assets/images/border.png"
+            }
+        }
+    }
+}

@@ -6,6 +6,7 @@
 #include <VolcaniCore/Renderer/RendererAPI.h>
 
 #include <Magma/ECS/EntityBuilder.h>
+#include <Magma/UI/UIBrowser.h>
 
 #include "Asset.h"
 #include "GameState.h"
@@ -32,10 +33,7 @@ Game::Game()
 
 	Asset::Init();
 
-	LoadScreens();
-
-	m_CurrentScreen = &HomeScreen;
-	m_CurrentScreen->OnLoad();
+	UI::UIBrowser::SetPage("Home");
 }
 
 Game::~Game() {
@@ -45,53 +43,11 @@ Game::~Game() {
 
 void Game::OnUpdate(TimeStep ts) {
 	RendererAPI::Get()->Clear();
-	m_CurrentScreen->OnUpdate(ts);
-	m_CurrentScreen->OnRender();
+	UI::UIBrowser::OnUpdate(ts);
+	UI::UIBrowser::OnRender();
 }
 
 void Game::LoadScreens() {
-	Ref<UI::UIElement> home, level, pause, over; 
-	auto window = Application::GetWindow();
-
-	UI::Window::Specification specs{
-		.Width = 600,
-		.Height = 300,
-		.x = (float)window->GetWidth()/2.0f - 300,
-		.y = (float)window->GetHeight()/2.0f - 150,
-		.Color = glm::vec4{ 0.859375f, 0.76171875f, 0.5859375f, 1.0f },
-		.BorderWidth = 10,
-		.BorderHeight = 20,
-		.BorderColor = glm::vec4{ 0.3125f, 0.234375f, 0.078125f, 1.0f }
-	};
-	home  = UI::Window::Create(specs);
-	level = UI::Window::Create(specs);
-	pause = UI::Window::Create(specs);
-	over  = UI::Window::Create(specs);
-
-	home
-	->Add<UI::Text>("The Maze is Lava", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f))
-	->SetPosition(160, 100);
-	home
-	->Add<UI::Text>("Press start to play", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f))
-	->SetPosition(145, 150);
-	// home
-	// ->Add<UI::Image>("TheMazeIsLava/assets/images/background.png")
-	// ->SetPosition(100, 100);
-
-	pause
-	->Add<UI::Text>("Paused", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f))
-	->SetPosition(160, 100);
-	pause
-	->Add<UI::Text>("Press enter to resume", glm::vec4(0.0f, 0.0f, 0.0f, 1.0f))
-	->SetPosition(120, 150);
-
-	EmptyScreen = Screen{ };
-	HomeScreen	= Screen{ home };
-	LevelScreen = Screen{ level };
-	PlayScreen  = Screen{ };
-	PauseScreen = Screen{ pause };
-	OverScreen	= Screen{ over };
-
 	HomeScreen.OnUpdate =
 		[&](TimeStep ts)
 		{

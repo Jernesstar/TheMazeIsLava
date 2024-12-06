@@ -1,0 +1,28 @@
+{
+    "Elements":
+    [
+        {
+            "ID": "Window1",
+            "Type": "Window"
+        },
+        {
+            "Parent": "Window1",
+
+            "ID": "WelcomeText",
+            "Type": "Text",
+            "Text": "The Maze Is Lava",
+            "x": "Center",
+            "y": "Center-Top"
+        },
+        {
+            "Parent": "Window1",
+
+            "ID": "WelcomeInstructions",
+            "Type": "Text",
+            "Text": "Press enter to continue",
+            "x": "Center",
+            "y": "Center-Top - 50",
+            "OnUpdate": "@cpp{ if(Input::KeyPressed(Key::Return) { UIBrowser::SetPage(\"Level\"); } }"
+        }
+    ]
+}
