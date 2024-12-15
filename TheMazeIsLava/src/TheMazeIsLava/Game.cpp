@@ -3,7 +3,7 @@
 #include <VolcaniCore/Core/Input.h>
 #include <VolcaniCore/Core/Assert.h>
 #include <VolcaniCore/Event/Events.h>
-#include <VolcaniCore/Renderer/RendererAPI.h>
+#include <VolcaniCore/Graphics/RendererAPI.h>
 
 #include <Magma/ECS/EntityBuilder.h>
 #include <Magma/UI/UIBrowser.h>

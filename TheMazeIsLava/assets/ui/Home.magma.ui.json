@@ -22,7 +22,7 @@
             "Text": "Press enter to continue",
             "x": "Center",
             "y": "Center-Top - 50",
-            "OnUpdate": "@cpp{ if(Input::KeyPressed(Key::Return) { UIBrowser::SetPage(\"Level\"); } }"
+            "OnUpdate": "@cpp{ if(Input::KeyPressed(Key::Return)) { UIBrowser::SetPage(\"Level\"); } }"
         }
     ]
 }

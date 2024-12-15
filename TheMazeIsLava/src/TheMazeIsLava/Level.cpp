@@ -1,6 +1,8 @@
 #include "Level.h"
 
-#include <VolcaniCore/Renderer/RendererAPI.h>
+#include <VolcaniCore/Graphics/Renderer.h>
+#include <VolcaniCore/Graphics/Renderer2D.h>
+#include <VolcaniCore/Graphics/Renderer3D.h>
 
 #include <Magma/ECS/EntityBuilder.h>
 
@@ -25,7 +27,7 @@ Level::Level(const std::string& name, const Tilemap& map)
 }
 
 void Level::OnUpdate(TimeStep ts) {
-	// auto game = (Game*)Application::Get();
+	auto* game = Application::As<Game>();
 	// game->Renderer.Update(ts);
 
 	if(m_Scene)
@@ -36,11 +38,11 @@ void Level::OnRender() {
 	if(!m_Scene)
 		return;
 
-	auto game = (Game*)Application::Get();
+	auto* game = Application::As<Game>();
 	m_Scene->OnRender(game->Renderer);
 
-	auto output = game->Renderer.GetOutput();
-	RendererAPI::Get()->RenderFramebuffer(output, AttachmentTarget::Color);
+	Ref<Framebuffer> output = game->Renderer.GetOutput();
+	Renderer2D::DrawFullscreenQuad(output, AttachmentTarget::Color);
 }
 
 void Level::TraverseTilemap(const Func<void, const Tile&>& func) {

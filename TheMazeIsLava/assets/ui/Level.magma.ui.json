@@ -17,7 +17,7 @@
 
             "Text": "1",
 
-            "OnClick": "@cpp{ GameState::SelectedLevel = 1 }"
+            "OnClick": "@cpp{ GameState::SelectedLevel = 1; }"
         },
         {
             "Parent": "Window1",
@@ -31,7 +31,7 @@
 
             "Text": "2",
 
-            "OnClick": "@cpp{ GameState::SelectedLevel = 2 }"
+            "OnClick": "@cpp{ GameState::SelectedLevel = 2; }"
         },
         {
             "Parent": "Window1",
@@ -45,7 +45,7 @@
 
             "Text": "3",
 
-            "OnClick": "@cpp{ GameState::SelectedLevel = 3 }"
+            "OnClick": "@cpp{ GameState::SelectedLevel = 3; }"
         },
         {
             "Parent": "Window1",
@@ -59,7 +59,7 @@
 
             "Text": "4",
 
-            "OnClick": "@cpp{ GameState::SelectedLevel = 4 }"
+            "OnClick": "@cpp{ GameState::SelectedLevel = 4; }"
         },
         {
             "Parent": "Window1",
@@ -73,7 +73,7 @@
 
             "Text": "5",
 
-            "OnClick": "@cpp{ GameState::SelectedLevel = 5 }"
+            "OnClick": "@cpp{ GameState::SelectedLevel = 5; }"
         }
     ]
 }

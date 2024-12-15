@@ -1,6 +1,6 @@
 #pragma once
 
-#include <VolcaniCore/Renderer/Camera.h>
+#include <VolcaniCore/Graphics/Camera.h>
 
 using namespace VolcaniCore;
 

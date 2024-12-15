@@ -12,8 +12,6 @@
             "Border": {
                 "Width": 10,
                 "Height": 20,
-                "x": "Center",
-                "y": "Center",
                 "Color": [0.3125, 0.234375, 0.078125, 1.0]
             }
         },

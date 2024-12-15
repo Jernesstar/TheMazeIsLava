@@ -1,7 +1,7 @@
 #include "Player.h"
 
 #include <VolcaniCore/Core/Input.h>
-#include <VolcaniCore/Renderer/Renderer3D.h>
+#include <VolcaniCore/Graphics/Renderer3D.h>
 
 #include "Asset.h"
 

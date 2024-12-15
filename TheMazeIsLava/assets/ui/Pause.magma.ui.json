@@ -22,7 +22,7 @@
             "Text": "Press enter to resume",
             "x": "Center",
             "y": "Center-Top - 50",
-            "OnUpdate": "@cpp{ if(Input::KeyPressed(Key::Return) { if(Page->Visible) { GameState::GetLevel().Paused = true; } } Page->Visible = !Page->Visible; }"
+            "OnUpdate": "@cpp{ GameState::GetLevel().Paused = Input::KeyPressed(Key::Return) && Page->Visible; }"
         }
     ]
 }

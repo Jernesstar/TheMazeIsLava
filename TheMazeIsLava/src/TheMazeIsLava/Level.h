@@ -4,7 +4,7 @@
 
 #include <VolcaniCore/Core/Defines.h>
 #include <VolcaniCore/Core/Time.h>
-#include <VolcaniCore/Object/Texture.h>
+#include <VolcaniCore/Graphics/Texture.h>
 
 #include <Magma/Scene/Scene.h>
 

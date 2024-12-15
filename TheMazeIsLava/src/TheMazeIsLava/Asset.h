@@ -1,6 +1,6 @@
 #pragma once
 
-#include <VolcaniCore/Object/Model.h>
+#include <VolcaniCore/Graphics/Model.h>
 
 using namespace VolcaniCore;
 
