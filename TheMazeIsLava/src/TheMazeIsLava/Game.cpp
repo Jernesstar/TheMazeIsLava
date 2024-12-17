@@ -42,7 +42,6 @@ Game::~Game() {
 }
 
 void Game::OnUpdate(TimeStep ts) {
-	RendererAPI::Get()->Clear();
 	UI::UIBrowser::OnUpdate(ts);
 	UI::UIBrowser::OnRender();
 }

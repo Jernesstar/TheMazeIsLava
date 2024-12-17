@@ -11,8 +11,9 @@
             "ID": "WelcomeText",
             "Type": "Text",
             "Text": "The Maze Is Lava",
-            "x": "Center",
-            "y": "Center-Top"
+            "xAlignment": "Center",
+            "yAlignment": "Top",
+            "y": -50
         },
         {
             "Parent": "Window1",
@@ -20,8 +21,9 @@
             "ID": "WelcomeInstructions",
             "Type": "Text",
             "Text": "Press enter to continue",
-            "x": "Center",
-            "y": "Center-Top - 50",
+            "xAlignment": "Center",
+            "yAlignment": "Top",
+            "x": -50,
             "OnUpdate": "@cpp{ if(Input::KeyPressed(Key::Return)) { UIBrowser::SetPage(\"Level\"); } }"
         }
     ]
