@@ -11,8 +11,9 @@
             "ID": "PauseText",
             "Type": "Text",
             "Text": "Paused",
-            "x": "Center",
-            "y": "Center-Top"
+            "xAlignment": "Center",
+            "yAlignment": "Center",
+            "x": "-50"
         },
         {
             "Parent": "Window1",
