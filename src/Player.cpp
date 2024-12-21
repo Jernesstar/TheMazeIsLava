@@ -18,7 +18,8 @@ Player::Player(ECS::World& world)
 	Add<RigidBodyComponent>(RigidBody::Type::Static);
 	Add<ScriptComponent>()
 	.OnInput =
-	[](TransformComponent& tc) {
+	[](TransformComponent& tc)
+	{
 		if(Input::MouseButtonPressed(Mouse::LeftButton))
 			return;
 

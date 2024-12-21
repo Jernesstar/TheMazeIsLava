@@ -1,0 +1,8 @@
+Project:
+  Name: The Maze is Lava
+  Class: Game
+  ECS:
+    Entities:
+      - Player
+    Components:
+      - SpriteRendererComponent

@@ -5,8 +5,6 @@
 #define YAML_CPP_STATIC_DEFINE
 #include <yaml-cpp/yaml.h>
 
-#include <Core/Log.h>
-
 #include <Magma/UI/UI.h>
 
 namespace TheMazeIsLava {
@@ -29,8 +27,7 @@ Level& GameState::GetLevel(uint32_t level) {
 	return Levels[level - 1];
 }
 
-// TODO(Implement): Magma/Core/Serialize
-// Don't deal directly with any specific data format (yaml, json)
+// TODO(Implement): Magma/Core/Deserialize; Don't deal directly with any specific data format (yaml, json)
 Level LoadLevel(YAML::Node levelNode) {
 	std::string name = levelNode["Name"].as<std::string>();
 

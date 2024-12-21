@@ -15,6 +15,7 @@
 #include "Light.h"
 
 using namespace Magma::ECS;
+using namespace Magma::UI;
 
 namespace TheMazeIsLava {
 
@@ -28,23 +29,24 @@ Game::Game()
 				Application::Close();
 		});
 
-	UI::UIRenderer::Init();
 	GameState::Reset();
 
 	Asset::Init();
 
-	UI::UIBrowser::SetPage("Home");
+	UIBrowser::SetPage("Home");
+	UIRenderer::Init();
 }
 
 Game::~Game() {
 	GameState::Save();
-	UI::UIRenderer::Close();
+	UIRenderer::Close();
 }
 
 void Game::OnUpdate(TimeStep ts) {
-	RendererAPI::Get()->Clear();
-	UI::UIBrowser::OnUpdate(ts);
-	UI::UIBrowser::OnRender();
+	UIRenderer::BeginFrame();
+	UIBrowser::OnUpdate(ts);
+	UIBrowser::OnRender();
+	UIRenderer::EndFrame();
 }
 
 void Game::LoadScreens() {
