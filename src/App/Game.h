@@ -13,7 +13,7 @@ namespace TheMazeIsLava {
 class Game : public Lava::App {
 public:
 	// LevelRenderer Renderer;
-	DefaultSceneRenderer Renderer;
+	// DefaultSceneRenderer Renderer;
 
 public:
 	Game() = default;

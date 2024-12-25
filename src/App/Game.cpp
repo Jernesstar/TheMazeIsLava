@@ -19,7 +19,6 @@ using namespace Magma::ECS;
 namespace TheMazeIsLava {
 
 void Game::OnLoad() {
-	VOLCANICORE_LOG_INFO("We made it this far, right?");
 	GameState::Reset();
 	// Lava::UIBrowser::SetPage("Home");
 }
@@ -65,35 +64,35 @@ void Game::LoadScreens() {
 			auto& currLevel = GameState::GetLevel();
 			currLevel.Load();
 			auto scene = currLevel.GetScene();
-			Renderer.SetContext(scene.get());
+			// Renderer.SetContext(scene.get());
 
-			auto camera = CreateRef<IsometricCamera>(100.0f);
-			auto& controller = Renderer.GetCameraController();
-			controller.SetControls(
-				MovementControls(
-					ControlMap
-					{
-						{ Control::Up,   Key::W },
-						{ Control::Down, Key::S },
-						{ Control::Forward,  Key::Invalid },
-						{ Control::Backward, Key::Invalid },
-					})
-				);
-			controller.TranslationSpeed = 5.0f;
-			controller.RotationSpeed = 0.0f;
-			controller.SetCamera(camera);
-			camera->SetDistance(60.0f);
+			// auto camera = CreateRef<IsometricCamera>(100.0f);
+			// auto& controller = Renderer.GetCameraController();
+			// controller.SetControls(
+			// 	MovementControls(
+			// 		ControlMap
+			// 		{
+			// 			{ Control::Up,   Key::W },
+			// 			{ Control::Down, Key::S },
+			// 			{ Control::Forward,  Key::Invalid },
+			// 			{ Control::Backward, Key::Invalid },
+			// 		})
+			// 	);
+			// controller.TranslationSpeed = 5.0f;
+			// controller.RotationSpeed = 0.0f;
+			// controller.SetCamera(camera);
+			// camera->SetDistance(60.0f);
 
-			scene->EntityWorld.AddEntity("MainCamera")
-			.Add<CameraComponent>(camera);
+			// scene->EntityWorld.AddEntity("MainCamera")
+			// .Add<CameraComponent>(camera);
 
-			auto [x, y] = currLevel.PlayerStart;
-			Player player(scene->EntityWorld);
-			player.Get<TransformComponent>() =
-				Transform
-				{
-					.Translation = { x, 5.0f, y }
-				};
+			// auto [x, y] = currLevel.PlayerStart;
+			// Player player(scene->EntityWorld);
+			// player.Get<TransformComponent>() =
+			// 	Transform
+			// 	{
+			// 		.Translation = { x, 5.0f, y }
+			// 	};
 
 			// TODO(Implement): Collision with group
 			// PhysicsSystem::RegisterForCollisionDetection(player, m_LavaGroup);

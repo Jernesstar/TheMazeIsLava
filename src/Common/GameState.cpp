@@ -39,8 +39,8 @@ Level LoadLevel(YAML::Node levelNode) {
 }
 
 void GameState::LoadState(bool newState) {
-	std::string path = newState ? "TheMazeIsLava/assets/saves/new.save"
-								: "TheMazeIsLava/assets/saves/game.save";
+	std::string path = newState ? "asset/save/new.save"
+								: "asset/save/game.save";
 	YAML::Node file;
 	try {
 		file = YAML::LoadFile(path);
