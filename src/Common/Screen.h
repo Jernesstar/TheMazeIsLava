@@ -1,6 +1,8 @@
 #pragma once
 
 #include <VolcaniCore/Core/Time.h>
+#include <VolcaniCore/Core/Defines.h>
+#include <VolcaniCore/Core/Codes.h>
 
 #include <Magma/UI/UIPage.h>
 
@@ -11,8 +13,8 @@ namespace TheMazeIsLava {
 
 class Screen {
 public:
-	std::function<void(void)> OnLoad = [](){};
-	std::function<void(TimeStep)> OnUpdate = [](TimeStep){};
+	Func<void> OnLoad = [](){};
+	Func<void, TimeStep> OnUpdate = [](TimeStep){};
 
 public:
 	Screen() = default;
@@ -22,9 +24,12 @@ public:
 	void OnRender();
 
 	UI::UIPage& GetUI() { return m_UI; }
+	Map<KeyCode, bool>& GetState() { return m_State; }
 
 private:
 	UI::UIPage m_UI;
+
+	Map<KeyCode, bool> m_State;
 };
 
 }

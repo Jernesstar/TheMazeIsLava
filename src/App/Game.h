@@ -1,24 +1,25 @@
 #pragma once
 
-#include <VolcaniCore/Core/Application.h>
+#include <Lava/App.h>
 
-#include "Screen.h"
-#include "LevelRenderer.h"
+#include <Common/Screen.h>
+#include <Common/LevelRenderer.h>
 
 using namespace VolcaniCore;
 using namespace Magma;
 
 namespace TheMazeIsLava {
 
-class Game : public Application {
+class Game : public Lava::App {
 public:
 	// LevelRenderer Renderer;
 	DefaultSceneRenderer Renderer;
 
 public:
-	Game();
-	~Game();
+	Game() = default;
 
+	void OnLoad() override;
+	void OnClose() override;
 	void OnUpdate(TimeStep ts) override;
 
 private:

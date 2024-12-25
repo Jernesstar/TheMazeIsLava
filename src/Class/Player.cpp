@@ -3,8 +3,6 @@
 #include <VolcaniCore/Core/Input.h>
 #include <VolcaniCore/Graphics/Renderer3D.h>
 
-#include "Asset.h"
-
 using namespace VolcaniCore;
 using namespace Magma::Physics;
 
@@ -14,7 +12,7 @@ Player::Player(ECS::World& world)
 	: Entity(world.AddEntity("Player").GetHandle())
 {
 	Add<TransformComponent>();
-	Add<MeshComponent>(Asset::Player);
+	// Add<MeshComponent>(Asset::Player);
 	Add<RigidBodyComponent>(RigidBody::Type::Static);
 	Add<ScriptComponent>()
 	.OnInput =

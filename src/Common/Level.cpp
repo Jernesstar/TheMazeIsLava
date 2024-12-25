@@ -6,8 +6,7 @@
 
 #include <Magma/ECS/EntityBuilder.h>
 
-#include "Asset.h"
-#include "Game.h"
+#include <App/Game.h>
 
 using namespace Magma::ECS;
 using namespace Magma::Physics;
@@ -27,7 +26,6 @@ Level::Level(const std::string& name, const Tilemap& map)
 }
 
 void Level::OnUpdate(TimeStep ts) {
-	auto* game = Application::As<Game>();
 	// game->Renderer.Update(ts);
 
 	if(m_Scene)
@@ -38,11 +36,11 @@ void Level::OnRender() {
 	if(!m_Scene)
 		return;
 
-	auto* game = Application::As<Game>();
-	m_Scene->OnRender(game->Renderer);
+	// auto* game = Application::As<Game>();
+	// m_Scene->OnRender(game->Renderer);
 
-	Ref<Framebuffer> output = game->Renderer.GetOutput();
-	Renderer2D::DrawFullscreenQuad(output, AttachmentTarget::Color);
+	// Ref<Framebuffer> output = game->Renderer.GetOutput();
+	// Renderer2D::DrawFullscreenQuad(output, AttachmentTarget::Color);
 }
 
 void Level::TraverseTilemap(const Func<void, const Tile&>& func) {
@@ -67,7 +65,7 @@ void Level::Load() {
 					{
 						.Translation = { x, 1.0f, y }
 					})
-				.Add<MeshComponent>(Asset::Wall)
+				// .Add<MeshComponent>(Asset::Wall)
 				// .Add<RigidBodyComponent>(RigidBody::Type::Static)
 				.Finalize();
 			}
@@ -79,7 +77,7 @@ void Level::Load() {
 						.Translation = { x, 0.0f, y },
 						// .Rotation = OrientPath(tile)
 					})
-				.Add<MeshComponent>(Asset::Path)
+				// .Add<MeshComponent>(Asset::Path)
 				// .Add<RigidBodyComponent>(RigidBody::Type::Static)
 				// .Add<MeshComponent>(PickPathMesh(tile))
 				.Finalize();
@@ -91,7 +89,7 @@ void Level::Load() {
 					{
 						.Translation = { x, 1.0f, y }
 					})
-				.Add<MeshComponent>(Asset::Lava)
+				// .Add<MeshComponent>(Asset::Lava)
 				// .Add<RigidBodyComponent>(RigidBody::Type::Static)
 				.Finalize();
 			}
@@ -104,7 +102,7 @@ void Level::Load() {
 						// .Rotation = OrientStairs(tile),
 						.Scale = glm::vec3(0.5)
 					})
-				.Add<MeshComponent>(Asset::Stairs)
+				// .Add<MeshComponent>(Asset::Stairs)
 				// .Add<RigidBodyComponent>(RigidBody::Type::Static)
 				.Finalize();
 			}

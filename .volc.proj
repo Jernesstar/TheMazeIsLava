@@ -1,6 +1,6 @@
 Project:
-  Name: The Maze is Lava
-  Class: Game
+  Name: TheMazeIsLava
+  App: Game
   ECS:
     Entities:
       - Player

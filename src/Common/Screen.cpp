@@ -6,21 +6,17 @@
 
 namespace TheMazeIsLava {
 
-Screen::Screen(const std::string& pagePath)
-	: m_UI(pagePath)
-{
+Screen::Screen(const std::string& pagePath) {
 	Events::RegisterListener<KeyPressedEvent>(
 		[&](const KeyPressedEvent& event)
 		{
-			// if(event.Key == Key::Return && !event.IsRepeat)
-			// 	m_State.ReturnPressed = true;
+			if(!event.IsRepeat)
+				m_State[event.Key] = true;
 		});
 }
 
 void Screen::OnRender() {
-	UI::UIRenderer::BeginFrame();
 	m_UI.Render();
-	UI::UIRenderer::EndFrame();
 }
 
 }
