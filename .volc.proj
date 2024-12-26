@@ -1,8 +1,16 @@
 Project:
   Name: TheMazeIsLava
   App: Game
-  ECS:
-    Entities:
-      - Player
-    Components:
-      - SpriteRendererComponent
+  Assets:
+    - Dirt:
+        Path: asset/image/dirt.jpeg
+    - Lava:
+        Path: asset/image/lava.png
+    - Stone:
+        Path: asset/image/stone.png
+    - End:
+        Path: asset/model/stairs/stairs.obj
+    - Player:
+        Path: asset/model/player/Knight_Golden_Male.obj
+    - Torch:
+        Path: asset/model/torch/torch.obj

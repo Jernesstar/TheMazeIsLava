@@ -14,6 +14,13 @@
                 "Height": 20,
                 "Color": [0.3125, 0.234375, 0.078125, 1.0]
             }
+        },
+
+        "Button":
+        {
+            "Border": {
+                "Image": "asset/image/border.png"
+            }
         }
     }
 }

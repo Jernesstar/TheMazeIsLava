@@ -102,7 +102,7 @@ void Level::Load() {
 						// .Rotation = OrientStairs(tile),
 						.Scale = glm::vec3(0.5)
 					})
-				// .Add<MeshComponent>(Asset::Stairs)
+				.Add<MeshComponent>("Goal")
 				// .Add<RigidBodyComponent>(RigidBody::Type::Static)
 				.Finalize();
 			}

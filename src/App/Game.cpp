@@ -40,7 +40,6 @@ void Game::LoadScreens() {
 			if(state[Key::Return]) {
 				state[Key::Return] = false;
 				m_CurrentScreen = &LevelScreen;
-				// GameState::SelectedLevel = 1;
 				m_CurrentScreen->OnLoad();
 			}
 		};
