@@ -35,7 +35,6 @@ public:
 	~Level() = default;
 
 	void OnUpdate(TimeStep ts);
-	void OnRender();
 
 	void Load();
 	Ref<Scene> GetScene() const { return m_Scene; }
@@ -52,6 +51,7 @@ public:
 
 private:
 	Ref<Scene> m_Scene = nullptr;
+	float m_LavaTick = 0;
 
 private:
 	void PropagateLava(TimeStep ts);

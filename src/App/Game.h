@@ -12,17 +12,15 @@ namespace TheMazeIsLava {
 
 class Game : public Lava::App {
 public:
-	// LevelRenderer Renderer;
-	// DefaultSceneRenderer Renderer;
+	LevelRenderer Renderer;
 
 public:
-	Game() = default;
-
 	void OnLoad() override;
 	void OnClose() override;
 	void OnUpdate(TimeStep ts) override;
 
 private:
+	void SetScreen(Screen& screen);
 	void LoadScreens();
 
 private:
@@ -32,7 +30,6 @@ private:
 	Screen HomeScreen;
 	Screen LevelScreen;
 	Screen PlayScreen;
-	Screen PauseScreen;
 	Screen OverScreen;
 };
 

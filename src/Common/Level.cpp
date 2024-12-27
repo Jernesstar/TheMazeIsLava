@@ -14,33 +14,13 @@ using namespace Magma::Physics;
 namespace TheMazeIsLava {
 
 Level::Level(const std::string& name, const Tilemap& map)
-	: Name(name), Width(map[0].size()), Height(map.size()), Map(map)
-{
-	TraverseTilemap(
-		[&](const Tile& tile)
-		{
-			if(IsLava(tile))  LavaPoints.push_back(tile);
-			if(IsGoal(tile))  Goal = tile;
-			if(IsStart(tile)) PlayerStart = tile;
-		});
-}
+	: Name(name), Width(map[0].size()), Height(map.size()), Map(map) { }
 
 void Level::OnUpdate(TimeStep ts) {
-	// game->Renderer.Update(ts);
+	PropagateLava(ts);
 
 	if(m_Scene)
 		m_Scene->OnUpdate(ts);
-}
-
-void Level::OnRender() {
-	if(!m_Scene)
-		return;
-
-	// auto* game = Application::As<Game>();
-	// m_Scene->OnRender(game->Renderer);
-
-	// Ref<Framebuffer> output = game->Renderer.GetOutput();
-	// Renderer2D::DrawFullscreenQuad(output, AttachmentTarget::Color);
 }
 
 void Level::TraverseTilemap(const Func<void, const Tile&>& func) {
@@ -58,6 +38,20 @@ void Level::Load() {
 		{
 			auto [x, y] = tile;
 
+			else if(IsStart(tile)) {
+				PlayerStart = tile;
+
+				world.BuildEntity()
+				.Add<TransformComponent>(
+					Transform
+					{
+						.Translation = { x, 1.0f, y }
+					})
+				.Add<MeshComponent>("Wall")
+				// .Add<RigidBodyComponent>(RigidBody::Type::Static)
+				.Finalize();
+			}
+
 			if(IsWall(tile)) {
 				world.BuildEntity()
 				.Add<TransformComponent>(
@@ -65,41 +59,43 @@ void Level::Load() {
 					{
 						.Translation = { x, 1.0f, y }
 					})
-				// .Add<MeshComponent>(Asset::Wall)
+				.Add<MeshComponent>("Wall")
 				// .Add<RigidBodyComponent>(RigidBody::Type::Static)
 				.Finalize();
 			}
-			else if(IsPath(tile) || IsStart(tile)) {
+			else if(IsPath(tile)) {
 				world.BuildEntity()
 				.Add<TransformComponent>(
 					Transform
 					{
-						.Translation = { x, 0.0f, y },
-						// .Rotation = OrientPath(tile)
+						.Translation = { x, 0.0f, y }
 					})
-				// .Add<MeshComponent>(Asset::Path)
+				.Add<MeshComponent>("Path")
 				// .Add<RigidBodyComponent>(RigidBody::Type::Static)
 				// .Add<MeshComponent>(PickPathMesh(tile))
 				.Finalize();
 			}
 			else if(IsLava(tile)) {
+				LavaPoints.push_back(tile);
+
 				world.BuildEntity()
 				.Add<TransformComponent>(
 					Transform
 					{
 						.Translation = { x, 1.0f, y }
 					})
-				// .Add<MeshComponent>(Asset::Lava)
+				.Add<MeshComponent>("Lava")
 				// .Add<RigidBodyComponent>(RigidBody::Type::Static)
 				.Finalize();
 			}
 			else if(IsGoal(tile)) {
+				Goal = tile;
+
 				world.BuildEntity("Goal")
 				.Add<TransformComponent>(
 					Transform
 					{
 						.Translation = { x, 1.0f, y },
-						// .Rotation = OrientStairs(tile),
 						.Scale = glm::vec3(0.5)
 					})
 				.Add<MeshComponent>("Goal")
@@ -107,19 +103,47 @@ void Level::Load() {
 				.Finalize();
 			}
 		});
-}
 
-glm::vec3 Level::OrientPath(const Tile& tile) {
-
-}
-
-glm::vec3 Level::OrientStairs(const Tile& tile) {
-
+	auto [x, y] = PlayerStart;
+	Player player(scene->EntityWorld);
+	player.Get<TransformComponent>() =
+		Transform
+		{
+			.Translation = { x, 5.0f, y }
+		};
 }
 
 void Level::PropagateLava(TimeStep ts) {
-	// TODO(Implement): Smooth lava
+	if((m_LavaTick += ts) >= 3.0f) // 3 Seconds
+		return;
 
+	m_LavaTick = 0;
+	List<Tile> newPoints;
+	for(auto& point : LavaPoints) {
+		uint32_t x = point.x, y = point.y;
+		Tile neighbors[] =
+			{ { x - 1, y }, { x + 1, y }, { x, y - 1 }, { x, y + 1 } };
+
+		for(auto n : neighbors) {
+			if(!IsInbounds(n) || !IsPath(n))
+				continue;
+			
+			m_Scene->EntityWorld
+			.BuildEntity()
+			.Add<TransformComponent>(
+				Transform
+				{
+					.Translation = { n.x, 1.0f, n.y }
+				})
+			.Add<MeshComponent>("Lava")
+			// .Add<RigidBodyComponent>(RigidBody::Type::Static)
+			.Finalize();
+
+			newPoints.push_back(n);
+		}
+	}
+
+	LavaPoints = newPoints;
 }
 
 // 0 -> Wall

@@ -20,7 +20,7 @@ namespace TheMazeIsLava {
 
 void Game::OnLoad() {
 	GameState::Reset();
-	// Lava::UIBrowser::SetPage("Home");
+	Lava::UIBrowser::SetPage("Home");
 }
 
 void Game::OnClose() {
@@ -31,6 +31,11 @@ void Game::OnUpdate(TimeStep ts) {
 
 }
 
+void Game::SetScreen(Screen& screen) {
+	m_CurrentScreen = &screen;
+	m_CurrentScreen->OnLoad();
+}
+
 void Game::LoadScreens() {
 	HomeScreen.OnUpdate =
 		[&](TimeStep ts)
@@ -39,9 +44,14 @@ void Game::LoadScreens() {
 
 			if(state[Key::Return]) {
 				state[Key::Return] = false;
-				m_CurrentScreen = &LevelScreen;
-				m_CurrentScreen->OnLoad();
+				SetScreen(LevelScreen);
 			}
+		};
+
+	LevelScreen.OnLoad =
+		[]()
+		{
+			Lava::UIBrowser::SetPage("Level");
 		};
 
 	LevelScreen.OnUpdate =
@@ -53,8 +63,7 @@ void Game::LoadScreens() {
 			if(GameState::SelectedLevel == 0)
 				return;
 
-			m_CurrentScreen = &PlayScreen;
-			m_CurrentScreen->OnLoad();
+			SetScreen(PlayScreen);
 		};
 
 	PlayScreen.OnLoad =
@@ -63,35 +72,27 @@ void Game::LoadScreens() {
 			auto& currLevel = GameState::GetLevel();
 			currLevel.Load();
 			auto scene = currLevel.GetScene();
-			// Renderer.SetContext(scene.get());
+			Renderer.SetContext(scene.get());
 
-			// auto camera = CreateRef<IsometricCamera>(100.0f);
-			// auto& controller = Renderer.GetCameraController();
-			// controller.SetControls(
-			// 	MovementControls(
-			// 		ControlMap
-			// 		{
-			// 			{ Control::Up,   Key::W },
-			// 			{ Control::Down, Key::S },
-			// 			{ Control::Forward,  Key::Invalid },
-			// 			{ Control::Backward, Key::Invalid },
-			// 		})
-			// 	);
-			// controller.TranslationSpeed = 5.0f;
-			// controller.RotationSpeed = 0.0f;
-			// controller.SetCamera(camera);
-			// camera->SetDistance(60.0f);
+			auto camera = CreateRef<IsometricCamera>(100.0f);
+			auto& controller = Renderer.GetCameraController();
+			controller.SetControls(
+				MovementControls(
+					ControlMap
+					{
+						{ Control::Up,   Key::W },
+						{ Control::Down, Key::S },
+						{ Control::Forward,  Key::Invalid },
+						{ Control::Backward, Key::Invalid },
+					})
+				);
+			controller.TranslationSpeed = 5.0f;
+			controller.RotationSpeed = 0.0f;
+			controller.SetCamera(camera);
+			camera->SetDistance(60.0f);
 
-			// scene->EntityWorld.AddEntity("MainCamera")
-			// .Add<CameraComponent>(camera);
-
-			// auto [x, y] = currLevel.PlayerStart;
-			// Player player(scene->EntityWorld);
-			// player.Get<TransformComponent>() =
-			// 	Transform
-			// 	{
-			// 		.Translation = { x, 5.0f, y }
-			// 	};
+			scene->EntityWorld.AddEntity("MainCamera")
+			.Add<CameraComponent>(camera);
 
 			// TODO(Implement): Collision with group
 			// PhysicsSystem::RegisterForCollisionDetection(player, m_LavaGroup);
@@ -104,50 +105,36 @@ void Game::LoadScreens() {
 			auto& level = GameState::GetLevel();
 
 			level.OnUpdate(ts);
-			level.OnRender();
+			Renderer.Update(ts);
+			Renderer.Render();
 
 			if(level.GameOver)
-				m_CurrentScreen = &OverScreen;
+				SetScreen(OverScreen);
 			else if(level.Complete) {
-				m_CurrentScreen = &LevelScreen;
+				SetScreen(LevelScreen);
 
-				if(GameState::SelectedLevel == GameState::MaxLevel) {
+				if(GameState::SelectedLevel == GameState::MaxLevel)
 					GameState::MaxLevel++;
-					m_CurrentScreen->OnLoad();
-				}
 			}
 			else if(state[Key::Return]) {
 				state[Key::Return] = false;
 				level.Paused = true;
-				m_CurrentScreen = &PauseScreen;
-				m_CurrentScreen->OnLoad();
-			}
-		};
-
-	// TODO(Fix): Have Pause UI be part of the PlayScreen
-	PauseScreen.OnUpdate =
-		[&](TimeStep _)
-		{
-			auto& state = HomeScreen.GetState();
-			auto& level = GameState::GetLevel();
-
-			if(state[Key::Return]) {
-				state[Key::Return] = false;
-				level.Paused = false;
-				m_CurrentScreen = &PlayScreen;
-				m_CurrentScreen->OnLoad();
+				Lava::UIBrowser::SetPage("Pause");
 			}
 		};
 
 	OverScreen.OnUpdate =
 		[&](TimeStep _)
 		{
-			auto& state = HomeScreen.GetState();
+			auto& state = OverScreen.GetState();
 
 			if(state[Key::Return]) {
 				state[Key::Return] = false;
-				m_CurrentScreen = &PlayScreen;
-				m_CurrentScreen->OnLoad();
+				SetScreen(PlayScreen);
+			}
+			else if(state[Key::Escape]) {
+				state[Key::Escape] = false;
+				SetScreen(LevelScreen);
 			}
 		};
 }

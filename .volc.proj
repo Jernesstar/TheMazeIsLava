@@ -2,12 +2,14 @@ Project:
   Name: TheMazeIsLava
   App: Game
   Assets:
-    - Dirt:
+    - Path:
         Path: asset/image/dirt.jpeg
     - Lava:
         Path: asset/image/lava.png
-    - Stone:
+    - Wall:
         Path: asset/image/stone.png
+    - Start:
+        Path: asset/image/gold.webp
     - End:
         Path: asset/model/stairs/stairs.obj
     - Player:
