@@ -23,8 +23,7 @@
             "Text": "Press enter to continue",
             "xAlignment": "Center",
             "yAlignment": "Top",
-            "x": -50,
-            "OnUpdate": "@cpp{ if(Input::KeyPressed(Key::Return)) { UIBrowser::SetPage(\"Level\"); } }"
+            "x": -50
         }
     ]
 }

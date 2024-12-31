@@ -20,7 +20,7 @@ namespace TheMazeIsLava {
 
 void Game::OnLoad() {
 	GameState::Reset();
-	Lava::UIBrowser::SetPage("Home");
+	LoadScreens();
 }
 
 void Game::OnClose() {

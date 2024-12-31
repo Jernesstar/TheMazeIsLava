@@ -1,13 +1,10 @@
 #include "Level.h"
 
-#include <VolcaniCore/Graphics/Renderer.h>
-#include <VolcaniCore/Graphics/Renderer2D.h>
-#include <VolcaniCore/Graphics/Renderer3D.h>
-
 #include <Magma/ECS/EntityBuilder.h>
 
-#include <App/Game.h>
+#include <Class/Player.h>
 
+using namespace VolcaniCore;
 using namespace Magma::ECS;
 using namespace Magma::Physics;
 
@@ -38,7 +35,7 @@ void Level::Load() {
 		{
 			auto [x, y] = tile;
 
-			else if(IsStart(tile)) {
+			if(IsStart(tile)) {
 				PlayerStart = tile;
 
 				world.BuildEntity()
@@ -51,8 +48,7 @@ void Level::Load() {
 				// .Add<RigidBodyComponent>(RigidBody::Type::Static)
 				.Finalize();
 			}
-
-			if(IsWall(tile)) {
+			else if(IsWall(tile)) {
 				world.BuildEntity()
 				.Add<TransformComponent>(
 					Transform
@@ -105,7 +101,7 @@ void Level::Load() {
 		});
 
 	auto [x, y] = PlayerStart;
-	Player player(scene->EntityWorld);
+	Player player(m_Scene->EntityWorld);
 	player.Get<TransformComponent>() =
 		Transform
 		{
