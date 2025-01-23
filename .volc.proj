@@ -1,6 +1,20 @@
 Project:
   Name: TheMazeIsLava
   App: Game
+  StartScreen: Home
+  Screens:
+    - Screen:
+        Name: HomeScreen
+        UI: Home
+    - Screen:
+        Name: SelectScreen
+        UI: Level
+    - Screen:
+        Name: PlayScreen
+        UI:
+            - Play
+            - Pause
+            - GameOver
   Assets:
     - Path:
         Path: asset/image/dirt.jpeg

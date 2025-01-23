@@ -7,8 +7,6 @@
 
 #include <Magma/ECS/EntityBuilder.h>
 
-#include <Lava/UIBrowser.h>
-
 #include <Class/Player.h>
 
 #include <Common/GameState.h>
