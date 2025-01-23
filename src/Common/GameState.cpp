@@ -33,7 +33,7 @@ Level LoadLevel(YAML::Node levelNode) {
 
 	List<List<uint32_t>> tilemap;
 	for(auto rowNode : levelNode["Tilemap"])
-		tilemap.push_back(rowNode.as<List<uint32_t>>());
+		tilemap.Add(rowNode.as<List<uint32_t>>());
 
 	return Level{ name, tilemap };
 }
