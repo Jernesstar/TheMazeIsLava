@@ -5,6 +5,11 @@ class HomeScreen : IScreen
 
     }
 
+    void OnClose()
+    {
+
+    }
+
     void OnUpdate(float ts)
     {
         ref ScreenState state = GetState();

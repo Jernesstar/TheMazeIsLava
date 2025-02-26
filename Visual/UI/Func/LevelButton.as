@@ -26,4 +26,6 @@ class LevelButton : IUIObject
     {
 
     }
+
+    string m_ID;
 }

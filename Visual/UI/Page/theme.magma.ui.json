@@ -19,7 +19,7 @@
         "Button":
         {
             "Border": {
-                "Image": "asset/image/border.png"
+                "Image": "Asset/Image/border.png"
             }
         }
     }

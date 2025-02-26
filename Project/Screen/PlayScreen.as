@@ -30,6 +30,11 @@ class HomeScreen : IScreen
         // PhysicsSystem::RegisterForCollisionDetection(player, m_LavaGroup);
     }
 
+    void OnClose()
+    {
+
+    }
+
     void OnUpdate(float ts)
     {
         auto& state = HomeScreen.GetState();

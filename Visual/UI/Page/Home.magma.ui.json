@@ -7,9 +7,9 @@
         },
         {
             "Parent": "Window1",
-
             "ID": "WelcomeText",
             "Type": "Text",
+
             "Text": "The Maze Is Lava",
             "xAlignment": "Center",
             "yAlignment": "Top",
@@ -17,10 +17,10 @@
         },
         {
             "Parent": "Window1",
-
             "ID": "WelcomeInstructions",
             "Type": "Text",
             "Text": "Press enter to continue",
+
             "xAlignment": "Center",
             "yAlignment": "Top",
             "x": -50
