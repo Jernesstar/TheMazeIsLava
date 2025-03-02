@@ -45,9 +45,9 @@ class HomeScreen : IScreen
         Renderer.Render();
 
         if(level.GameOver)
-            SetScreen(OverScreesn);
+            App.SetScreen("OverScreen");
         else if(level.Complete) {
-            SetScreen(LevelScreen);
+            App.SetScreen("LevelScreen");
 
             if(GameState::SelectedLevel == GameState::MaxLevel)
                 GameState::MaxLevel++;
@@ -55,7 +55,7 @@ class HomeScreen : IScreen
         else if(state[Key::Return]) {
             state[Key::Return] = false;
             level.Paused = true;
-            Lava::UIBrowser::SetPage("Pause");
+            App.PushScreen("Pause");
         }
     }
 
