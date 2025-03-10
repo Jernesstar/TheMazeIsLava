@@ -2,13 +2,13 @@ Project:
   Name: TheMazeIsLava
   App: TheMazeIsLava
   ExportPath: ""
-  StartScreen: HomeScreen
+  StartScreen: Home
   Screens:
     - Screen:
-        Name: HomeScreen
+        Name: Home
         Scene: ""
         UI: Home
     - Screen:
-        Name: SelectScreen
+        Name: Level
         Scene: ""
         UI: Level
