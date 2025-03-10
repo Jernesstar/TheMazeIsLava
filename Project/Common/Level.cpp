@@ -110,36 +110,7 @@ void Level::Load() {
 }
 
 void Level::PropagateLava(TimeStep ts) {
-	if((m_LavaTick += ts) >= 3.0f) // 3 Seconds
-		return;
 
-	m_LavaTick = 0;
-	List<Tile> newPoints;
-	for(auto& point : LavaPoints) {
-		uint32_t x = point.x, y = point.y;
-		Tile neighbors[] =
-			{ { x - 1, y }, { x + 1, y }, { x, y - 1 }, { x, y + 1 } };
-
-		for(auto n : neighbors) {
-			if(!IsInbounds(n) || !IsPath(n))
-				continue;
-			
-			m_Scene->EntityWorld
-			.BuildEntity()
-			.Add<TransformComponent>(
-				Transform
-				{
-					.Translation = { n.x, 1.0f, n.y }
-				})
-			.Add<MeshComponent>("Lava")
-			// .Add<RigidBodyComponent>(RigidBody::Type::Static)
-			.Finalize();
-
-			newPoints.push_back(n);
-		}
-	}
-
-	LavaPoints = newPoints;
 }
 
 // 0 -> Wall

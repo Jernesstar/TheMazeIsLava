@@ -12,10 +12,10 @@ class HomeScreen : IScreen
 
     void OnUpdate(float ts)
     {
-        if(s_GameState.SelectedLevel == 0)
+        if(GameState.SelectedLevel == 0)
             return;
 
-        App.SetScreen(PlayScreen);
+        App.SetScreen("PlayScreen");
     }
 
 }

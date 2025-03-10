@@ -4,7 +4,6 @@ class HomeScreen : IScreen
     {
         auto& currLevel = GameState::GetLevel();
         currLevel.Load();
-        auto scene = currLevel.GetScene();
 
         auto camera = CreateRef<IsometricCamera>(100.0f);
         auto& controller = Renderer.GetCameraController();
@@ -23,8 +22,7 @@ class HomeScreen : IScreen
         controller.SetCamera(camera);
         camera.SetDistance(60.0f);
 
-        scene.EntityWorld.AddEntity("MainCamera")
-        .Add<CameraComponent>(camera);
+        Scene.AddEntity("MainCamera").Add<CameraComponent>(camera);
 
         // TODO(Implement): Collision with group
         // PhysicsSystem::RegisterForCollisionDetection(player, m_LavaGroup);
@@ -41,13 +39,11 @@ class HomeScreen : IScreen
         auto& level = GameState::GetLevel();
 
         level.OnUpdate(ts);
-        Renderer.Update(ts);
-        Renderer.Render();
 
         if(level.GameOver)
-            App.SetScreen("OverScreen");
+            UIPage.PushLayer("GameOver");
         else if(level.Complete) {
-            App.SetScreen("LevelScreen");
+            UIPage.PushLayer("LevelComplete");
 
             if(GameState::SelectedLevel == GameState::MaxLevel)
                 GameState::MaxLevel++;
@@ -55,7 +51,7 @@ class HomeScreen : IScreen
         else if(state[Key::Return]) {
             state[Key::Return] = false;
             level.Paused = true;
-            App.PushScreen("Pause");
+            UIPage.PushLayer("Pause");
         }
     }
 
