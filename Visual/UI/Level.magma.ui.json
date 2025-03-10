@@ -17,7 +17,8 @@
 
             "Text": "1",
 
-            "OnClick": "@cpp{ GameState::SelectedLevel = 1; }"
+            "ModuleID": 0,
+            "Class": "LevelButton"
         },
         {
             "Parent": "Window1",
@@ -31,7 +32,8 @@
 
             "Text": "2",
 
-            "OnClick": "@cpp{ GameState::SelectedLevel = 2; }"
+            "ModuleID": 0,
+            "Class": "LevelButton"
         },
         {
             "Parent": "Window1",
@@ -45,7 +47,8 @@
 
             "Text": "3",
 
-            "OnClick": "@cpp{ GameState::SelectedLevel = 3; }"
+            "ModuleID": 0,
+            "Class": "LevelButton"
         },
         {
             "Parent": "Window1",
@@ -59,7 +62,8 @@
 
             "Text": "4",
 
-            "OnClick": "@cpp{ GameState::SelectedLevel = 4; }"
+            "ModuleID": 0,
+            "Class": "LevelButton"
         },
         {
             "Parent": "Window1",
@@ -73,7 +77,8 @@
 
             "Text": "5",
 
-            "OnClick": "@cpp{ GameState::SelectedLevel = 5; }"
+            "ModuleID": 0,
+            "Class": "LevelButton"
         }
     ]
 }
