@@ -1,5 +1,9 @@
-class TheMazeIsLava : IApp
+#include "Class/GameState.as"
+
+shared class TheMazeIsLava : IApp
 {
+	GameStateClass GameState;
+
 	void OnLoad()
 	{
 		print("Lava Game");

@@ -1,3 +1,4 @@
+#include "App/TheMazeIsLava.as"
 
 class LevelButton : IUIObject
 {
@@ -10,9 +11,11 @@ class LevelButton : IUIObject
 
     void OnClick()
     {
-        // Button__
-        auto subStr = ID.substr(5);
-        ScriptApp.GameState.SelectedLevel = parseInt(subStr);
+        TheMazeIsLava @app = cast<TheMazeIsLava>(ScriptClass);
+
+        // Button_
+        string subStr = ID.substr(6);
+        app.GameState.SelectedLevel = parseInt(subStr);
     }
 
     void OnHover()

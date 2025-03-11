@@ -14,5 +14,5 @@ Scene:
       MeshComponent:
         AssetID: 2550836024222576561
       ScriptComponent:
-        ModuleID: 39453405
+        ModuleID: 3945344187590140405
         Class: PlayerController
