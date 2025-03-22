@@ -1,21 +1,24 @@
 #include "App/TheMazeIsLava.as"
 
-class LevelButton : IUIObject
+class LevelButton : IUIController
 {
     string ID;
+    uint32 Level;
 
     LevelButton(const string &id)
     {
         ID = id;
     }
 
+    void OnUpdate(float ts)
+    {
+
+    }
+
     void OnClick()
     {
-        TheMazeIsLava @app = cast<TheMazeIsLava>(ScriptClass);
-
-        // Button_
-        string subStr = ID.substr(6);
-        app.GameState.SelectedLevel = parseInt(subStr);
+        TheMazeIsLava@ app = cast<TheMazeIsLava>(ScriptClass);
+        app.GameState.SelectedLevel = Level;
     }
 
     void OnHover()
@@ -29,11 +32,6 @@ class LevelButton : IUIObject
     }
 
     void OnMouseDown()
-    {
-
-    }
-
-    void OnUpdate(float ts)
     {
 
     }

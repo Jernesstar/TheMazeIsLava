@@ -15,7 +15,7 @@ class HomeScreen : IScreen
         if(GameState.SelectedLevel == 0)
             return;
 
-        App.SetScreen("Play");
+        App.SwitchScreen("Play");
     }
 
 }

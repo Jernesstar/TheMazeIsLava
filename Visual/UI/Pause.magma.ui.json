@@ -13,7 +13,7 @@
             "Text": "Paused",
             "xAlignment": "Center",
             "yAlignment": "Center",
-            "y": -50
+            "y": 50
         },
         {
             "Parent": "Window1",
@@ -23,8 +23,7 @@
             "Text": "Press enter to resume",
             "xAlignment": "Center",
             "yAlignment": "Top",
-            "x": -50,
-            "OnUpdate": "@cpp{ GameState::GetLevel().Paused = Input::KeyPressed(Key::Return) && Page->Visible; }"
+            "x": 50
         }
     ]
 }

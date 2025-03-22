@@ -1,5 +1,5 @@
 
-class Player : IEntity
+class Player : IEntityController
 {
     Entity Handle;
 
@@ -25,5 +25,25 @@ class Player : IEntity
         float speed = 0.03f;
         if(dx || dz)
             tc.Translation += normalize(moveDir) * speed * ts;
+    }
+
+    void OnKeyEvent(KeyEvent@ event)
+    {
+
+    }
+
+    void OnMouseEvent(MouseEvent@ event)
+    {
+
+    }
+
+    void OnPhysicsEvent(PhysicsEvent@ event)
+    {
+
+    }
+
+    void OnGameEvent(GameEvent@ event)
+    {
+
     }
 }
