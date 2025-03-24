@@ -6,7 +6,7 @@ shared class Tile
 
 shared class Level
 {
-    uint32_t Width, Height;
+    uint32 Width, Height;
     List<uint8> Map;
 
     Level()

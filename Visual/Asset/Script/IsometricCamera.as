@@ -17,12 +17,14 @@ class IsometricCamera : IEntityController
                     sin(radians(45.0f))
                 };
         cc.Direction = -normalize(Position);
+
+        cc.ViewportWidth = 480 * (2.0f / R);
+        cc.ViewportHeight = 270 * (2.0f / R);
     }
 
     void OnUpdate()
     {
-        cc.ViewportWidth = 480 * (2.0f / R);
-        cc.ViewportHeight = 270 * (2.0f / R);
+
     }
 
     void OnKeyEvent(KeyEvent@ event)
