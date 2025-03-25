@@ -16,7 +16,7 @@ class HomeScreen : IScreen
         if(state[Key::Return])
         {
             state[Key::Return] = false;
-            App.SetScreen("Level");
+            App.SwitchScreen("Level");
         }
     }
 

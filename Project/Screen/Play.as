@@ -1,4 +1,4 @@
-class HomeScreen : IScreen
+class PlayScreen : IScreen
 {
     void OnLoad()
     {

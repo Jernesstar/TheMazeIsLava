@@ -1,22 +1,22 @@
 AssetPack:
   Assets:
     - Asset:
-        ID: 12862340100883243302
-        Type: 1
-        Path: Image/border.png
-    - Asset:
         ID: 4014777478766481147
         Type: 1
         Path: Image/stone.png
     - Asset:
-        ID: 9152749177295026244
+        ID: 7676427805583160877
         Type: 1
-        Path: Image/lava.png
+        Path: Image/dirt.jpeg
     - Asset:
         ID: 8659743564861863896
         Type: 1
         Path: Image/gold.webp
     - Asset:
-        ID: 7676427805583160877
+        ID: 9152749177295026244
         Type: 1
-        Path: Image/dirt.jpeg
+        Path: Image/lava.png
+    - Asset:
+        ID: 12862340100883243302
+        Type: 1
+        Path: Image/border.png

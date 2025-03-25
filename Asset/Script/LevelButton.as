@@ -1,4 +1,4 @@
-#include "App/TheMazeIsLava.as"
+#include "../../Project/App/TheMazeIsLava.as"
 
 class LevelButton : IUIController
 {

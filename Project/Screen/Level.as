@@ -1,4 +1,4 @@
-class HomeScreen : IScreen
+class LevelScreen : IScreen
 {
     void OnLoad()
     {

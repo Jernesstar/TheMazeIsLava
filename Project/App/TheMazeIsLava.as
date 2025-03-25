@@ -1,4 +1,4 @@
-#include "Class/GameState.as"
+#include "../Class/GameState.as"
 
 shared class TheMazeIsLava : IApp
 {
