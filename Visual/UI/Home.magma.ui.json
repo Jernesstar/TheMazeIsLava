@@ -1,29 +1,51 @@
 {
-    "Elements":
-    [
+    "Elements": [
         {
             "ID": "Window1",
-            "Type": "Window"
+            "Type": "Window",
+            "Width": 600,
+            "Height": 300,
+            "x": 0,
+            "y": 0,
+            "xAlignment": "Center",
+            "yAlignment": "Center",
+            "Color": [0.859375, 0.76171875, 0.5859375, 1.0],
+            "ModuleID": 0,
+            "Class": "",
+            "BorderWidth": 0,
+            "BorderHeight": 0,
+            "BorderColor": [0.0, 0.0, 0.0, 0.0]
         },
         {
-            "Parent": "Window1",
             "ID": "WelcomeText",
             "Type": "Text",
-
-            "Text": "The Maze Is Lava",
+            "Parent": "Window1",
+            "Width": 0,
+            "Height": 0,
+            "x": 0,
+            "y": 50,
             "xAlignment": "Center",
             "yAlignment": "Top",
-            "y": 50
+            "Color": [0.0, 0.0, 0.0, 0.0],
+            "ModuleID": 0,
+            "Class": "",
+            "Text": "The Maze Is Lava",
+            "TextColor": [0.0, 0.0, 0.0, 0.0]
         },
         {
-            "Parent": "Window1",
             "ID": "WelcomeInstructions",
             "Type": "Text",
-            "Text": "Press enter to continue",
-
+            "Parent": "Window1",
+            "Width": 0,
+            "Height": 0,
+            "x": 50,
+            "y": 0,
             "xAlignment": "Center",
             "yAlignment": "Top",
-            "x": 50
-        }
-    ]
+            "Color": [0.0, 0.0, 0.0, 0.0],
+            "ModuleID": 0,
+            "Class": "",
+            "Text": "Press enter to continue",
+            "TextColor": [0.0, 0.0, 0.0, 0.0]
+        }]
 }

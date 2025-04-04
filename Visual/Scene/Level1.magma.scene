@@ -1,0 +1,17 @@
+Scene:
+  Name: New Scene
+  Entities:
+    - Entity:
+        Name: ""
+        ID: 540
+        Components:
+          CameraComponent:
+            Camera:
+              Type: Stereographic
+              VerticalFOV: 45
+              Position: [0, 0, 10]
+              Direction: [0, 0, -1]
+              ViewportWidth: 800
+              ViewportHeight: 600
+              Near: 0.00100000005
+              Far: 1000

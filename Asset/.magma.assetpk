@@ -1,22 +1,62 @@
 AssetPack:
   Assets:
     - Asset:
-        ID: 4014777478766481147
-        Type: 1
-        Path: Image/stone.png
+        ID: 1116263781428243600
+        Type: Texture
+        Path: Image/icon.png
     - Asset:
-        ID: 7676427805583160877
-        Type: 1
-        Path: Image/dirt.jpeg
+        ID: 1503689015673725745
+        Type: Script
+        Path: Script/Player.as
     - Asset:
-        ID: 8659743564861863896
-        Type: 1
+        ID: 4784818156094493288
+        Type: Script
+        Path: Script/Spider.as
+    - Asset:
+        ID: 4975861332934482515
+        Type: Texture
         Path: Image/gold.webp
     - Asset:
-        ID: 9152749177295026244
-        Type: 1
+        ID: 8808176318344075065
+        Type: Mesh
+        Path: Mesh/torch/torch.obj
+    - Asset:
+        ID: 9135859329569859042
+        Type: Mesh
+        Path: Mesh/player/Knight_Golden_Male.obj
+    - Asset:
+        ID: 9379610506206156467
+        Type: Mesh
+        Path: Mesh/rocks/rocks.obj
+    - Asset:
+        ID: 10652487024113119011
+        Type: Mesh
+        Path: Mesh/stairs/stairs.obj
+    - Asset:
+        ID: 11133238322135416622
+        Type: Texture
+        Path: Image/stone.png
+    - Asset:
+        ID: 12792039908774318852
+        Type: Script
+        Path: Script/LevelButton.as
+    - Asset:
+        ID: 15585412503154922005
+        Type: Script
+        Path: Script/IsometricCamera.as
+    - Asset:
+        ID: 15673016010349369343
+        Type: Texture
         Path: Image/lava.png
     - Asset:
-        ID: 12862340100883243302
-        Type: 1
+        ID: 15765867760871931416
+        Type: Texture
         Path: Image/border.png
+    - Asset:
+        ID: 16730603527850583685
+        Type: Texture
+        Path: Image/dirt.jpeg
+    - Asset:
+        ID: 17930437727414257517
+        Type: Script
+        Path: Script/Level.as

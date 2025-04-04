@@ -6,24 +6,18 @@ shared class Tile
 
 shared class Level
 {
-    uint32 Width, Height;
+    [Tilemap Width]
+    uint32 Width;
+
+    [Tilemap Height]
+    uint32 Height;
+
+    [Tilemap Data]
     List<uint8> Map;
 
     Level()
     {
 
-    }
-
-    void Load(uint32 level)
-    {
-        BinaryFile file("Asset/save/level_" + level + ".bin");
-        file.Read(Width);
-        file.Read(Height);
-        file.Read(Map);
-
-        Entity cameraEntity = Scene.AddEntity("MainCamera");
-        cameraEntity.AddCameraComponent(CameraType::Ortho);
-        cameraEntity.AddScriptComponent(404, "IsometricCamera");
     }
 
     bool IsWall(const Tile& tile) const {
