@@ -25,8 +25,7 @@ class PlayScreen : IScreen
             if(GameState::SelectedLevel == GameState::MaxLevel)
                 GameState::MaxLevel++;
         }
-        else if(state[Key::Return]) {
-            state[Key::Return] = false;
+        else if(KeyPressed(Key::Return)) {
             level.Paused = true;
             UIPage.PushLayer("Pause");
         }

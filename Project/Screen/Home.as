@@ -12,12 +12,7 @@ class HomeScreen : IScreen
 
     void OnUpdate(float ts)
     {
-        ref ScreenState state = GetState();
-        if(state[Key::Return])
-        {
-            state[Key::Return] = false;
+        if(KeyPressed(Key::Return))
             App.SwitchScreen("Level");
-        }
     }
-
 }

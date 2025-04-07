@@ -4,8 +4,10 @@ shared class Tile
     uint8 x, y;
 }
 
-shared class Level
+class Level
 {
+    Entity Handle;
+
     [Tilemap Width]
     uint32 Width;
 
@@ -15,9 +17,9 @@ shared class Level
     [Tilemap Data]
     List<uint8> Map;
 
-    Level()
+    Level(Entity entity)
     {
-
+        Handle = entity;
     }
 
     bool IsWall(const Tile& tile) const {
