@@ -12,22 +12,18 @@ class PlayScreen : IScreen
 
     void OnUpdate(float ts)
     {
-        auto& state = HomeScreen.GetState();
-        auto& level = GameState::GetLevel();
-
-        level.OnUpdate(ts);
+        TheMazeIsLava@ game = cast<TheMazeIsLava>(ScriptApp);
+        Entity entity = Scene.FindEntity("LevelData");
+        Level@ level = cast<Level>(entity.GetScriptComponent().Instance);
 
         if(level.GameOver)
             UIPage.PushLayer("GameOver");
-        else if(level.Complete) {
+        else if (level.Complete)
             UIPage.PushLayer("LevelComplete");
-
-            if(GameState::SelectedLevel == GameState::MaxLevel)
-                GameState::MaxLevel++;
-        }
-        else if(KeyPressed(Key::Return)) {
-            level.Paused = true;
-            UIPage.PushLayer("Pause");
+        else if (KeyPressed(Key::Return)) {
+            level.Paused = !level.Paused;
+            if(level.Paused)
+                UIPage.PushLayer("Pause");
         }
     }
 

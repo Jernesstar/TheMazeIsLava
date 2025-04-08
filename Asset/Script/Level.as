@@ -4,7 +4,7 @@ shared class Tile
     uint8 x, y;
 }
 
-class Level
+shared class Level
 {
     Entity Handle;
 
@@ -17,9 +17,38 @@ class Level
     [Tilemap Data]
     List<uint8> Map;
 
+    bool Paused = false;
+    bool GameOver = false;
+    bool Complete = false;
+
     Level(Entity entity)
     {
         Handle = entity;
+    }
+
+    void OnUpdate(float ts)
+    {
+        // Propagate lava
+    }
+
+    void OnKeyEvent(KeyEvent@ event)
+    {
+
+    }
+
+    void OnMouseEvent(MouseEvent@ event)
+    {
+
+    }
+
+    void OnPhysicsEvent(PhysicsEvent@ event)
+    {
+
+    }
+
+    void OnGameEvent(GameEvent@ event)
+    {
+
     }
 
     bool IsWall(const Tile& tile) const {

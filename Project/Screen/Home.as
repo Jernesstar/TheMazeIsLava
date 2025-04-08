@@ -2,7 +2,7 @@ class HomeScreen : IScreen
 {
     void OnLoad()
     {
-
+        App.LoadUI("HomeUI");
     }
 
     void OnClose()

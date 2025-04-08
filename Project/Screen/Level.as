@@ -12,10 +12,10 @@ class LevelScreen : IScreen
 
     void OnUpdate(float ts)
     {
-        if(GameState.SelectedLevel == 0)
+        TheMazeIsLava@ game = cast<TheMazeIsLava>(ScriptApp);
+        if(game.GameState.SelectedLevel == 0)
             return;
 
         App.SwitchScreen("Play");
     }
-
 }

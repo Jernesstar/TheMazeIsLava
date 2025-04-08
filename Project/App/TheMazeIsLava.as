@@ -6,16 +6,16 @@ shared class TheMazeIsLava : IApp
 
 	void OnLoad()
 	{
-		print("Lava Game");
+		JSONSerializer.Deserialize(GameState);
 	}
 
 	void OnClose()
 	{
-		print("Lava Close");
+		JSONSerializer.Serialize(GameState);
 	}
 
 	void OnUpdate(float ts)
 	{
-		// print("OnUpdate: " + ts);
+
 	}
 }
