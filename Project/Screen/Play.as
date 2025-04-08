@@ -16,7 +16,7 @@ class PlayScreen : IScreen
         Entity entity = Scene.FindEntity("LevelData");
         Level@ level = cast<Level>(entity.GetScriptComponent().Instance);
 
-        if(level.GameOver)
+        if (level.GameOver)
             UIPage.PushLayer("GameOver");
         else if (level.Complete)
             UIPage.PushLayer("LevelComplete");
@@ -24,6 +24,8 @@ class PlayScreen : IScreen
             level.Paused = !level.Paused;
             if(level.Paused)
                 UIPage.PushLayer("Pause");
+            else
+                UIPage.PopLayer();
         }
     }
 

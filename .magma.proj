@@ -3,3 +3,5 @@ Project:
   Name: TheMazeIsLava
   App: TheMazeIsLava
   StartScreen: Home
+  Screens:
+    []

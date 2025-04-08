@@ -1,84 +1,105 @@
 {
-    "Elements":
-    [
+    "Elements": [
         {
             "ID": "Window1",
-            "Type": "Window"
+            "Type": "Window",
+            "Width": 600,
+            "Height": 300,
+            "x": 0,
+            "y": 0,
+            "xAlignment": "Center",
+            "yAlignment": "Center",
+            "UsePosition": false,
+            "Color": [0.859375, 0.76171875, 0.5859375, 1.0],
+            "ModuleID": 0,
+            "Class": "",
+            "BorderWidth": 0,
+            "BorderHeight": 0,
+            "BorderColor": [0.0, 0.0, 0.0, 0.0]
         },
         {
-            "Parent": "Window1",
-
             "ID": "Button1",
             "Type": "Button",
+            "Parent": "Window1",
             "Width": 70,
             "Height": 40,
             "x": 70,
             "y": 100,
-
-            "Text": "1",
-
+            "xAlignment": "Left",
+            "yAlignment": "Top",
+            "UsePosition": false,
+            "Color": [0.0, 0.0, 0.0, 0.0],
             "ModuleID": 0,
-            "Class": "LevelButton"
+            "Class": "LevelButton",
+            "Text": "1",
+            "TextColor": [0.0, 0.0, 0.0, 0.0]
         },
         {
-            "Parent": "Window1",
-
             "ID": "Button2",
             "Type": "Button",
+            "Parent": "Window1",
             "Width": 70,
             "Height": 40,
             "x": 180,
             "y": 100,
-
-            "Text": "2",
-
+            "xAlignment": "Left",
+            "yAlignment": "Top",
+            "UsePosition": false,
+            "Color": [0.0, 0.0, 0.0, 0.0],
             "ModuleID": 0,
-            "Class": "LevelButton"
+            "Class": "LevelButton",
+            "Text": "2",
+            "TextColor": [0.0, 0.0, 0.0, 0.0]
         },
         {
-            "Parent": "Window1",
-
             "ID": "Button3",
             "Type": "Button",
+            "Parent": "Window1",
             "Width": 70,
             "Height": 40,
             "x": 250,
             "y": 100,
-
-            "Text": "3",
-
+            "xAlignment": "Left",
+            "yAlignment": "Top",
+            "UsePosition": false,
+            "Color": [0.0, 0.0, 0.0, 0.0],
             "ModuleID": 0,
-            "Class": "LevelButton"
+            "Class": "LevelButton",
+            "Text": "3",
+            "TextColor": [0.0, 0.0, 0.0, 0.0]
         },
         {
-            "Parent": "Window1",
-
             "ID": "Button4",
             "Type": "Button",
+            "Parent": "Window1",
             "Width": 70,
             "Height": 40,
             "x": 320,
             "y": 100,
-
-            "Text": "4",
-
+            "xAlignment": "Left",
+            "yAlignment": "Top",
+            "UsePosition": false,
+            "Color": [0.0, 0.0, 0.0, 0.0],
             "ModuleID": 0,
-            "Class": "LevelButton"
+            "Class": "LevelButton",
+            "Text": "4",
+            "TextColor": [0.0, 0.0, 0.0, 0.0]
         },
         {
-            "Parent": "Window1",
-
             "ID": "Button5",
             "Type": "Button",
+            "Parent": "Window1",
             "Width": 70,
             "Height": 40,
             "x": 390,
             "y": 100,
-
-            "Text": "5",
-
+            "xAlignment": "Left",
+            "yAlignment": "Top",
+            "UsePosition": false,
+            "Color": [0.0, 0.0, 0.0, 0.0],
             "ModuleID": 0,
-            "Class": "LevelButton"
-        }
-    ]
+            "Class": "LevelButton",
+            "Text": "5",
+            "TextColor": [0.0, 0.0, 0.0, 0.0]
+        }]
 }
