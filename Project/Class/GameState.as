@@ -1,5 +1,4 @@
 
-[Serialize]
 shared class GameStateClass
 {
     uint32 SelectedLevel;

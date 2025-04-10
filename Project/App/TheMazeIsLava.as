@@ -6,12 +6,12 @@ shared class TheMazeIsLava : IApp
 
 	void OnLoad()
 	{
-		JSONSerializer.Deserialize(GameState);
+		// JSONObject.Deserialize(GameState);
 	}
 
 	void OnClose()
 	{
-		JSONSerializer.Serialize(GameState);
+		// JSONObject.Serialize(GameState);
 	}
 
 	void OnUpdate(float ts)

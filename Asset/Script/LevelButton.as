@@ -5,7 +5,7 @@ class LevelButton : IUIController
     string ID;
     uint32 Level;
 
-    LevelButton(const string &id)
+    LevelButton(string id)
     {
         ID = id;
     }
@@ -17,7 +17,7 @@ class LevelButton : IUIController
 
     void OnClick()
     {
-        TheMazeIsLava@ app = cast<TheMazeIsLava>(ScriptClass);
+        TheMazeIsLava@ app = cast<TheMazeIsLava>(ScriptApp);
         app.GameState.SelectedLevel = Level;
     }
 
