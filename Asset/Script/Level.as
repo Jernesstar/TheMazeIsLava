@@ -66,6 +66,9 @@ shared class Level
     bool IsStart(const Tile& tile) const {
         return Map[tile.y * Height + tile.x] == 4;
     }
+    bool IsDoor(const Tile& tile) const {
+        return Map[tile.y * Height + tile.x] == 5;
+    }
     bool IsCheckpoint(const Tile& tile) const {
         return Map[tile.y * Height + tile.x] == 5;
     }
