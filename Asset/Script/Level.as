@@ -4,18 +4,15 @@ shared class Tile
     uint8 x, y;
 }
 
-shared class Level
+shared class Level : IEntityController
 {
     Entity Handle;
 
-    [Tilemap Width]
-    uint32 Width;
+    [EditorField] uint32 Width;
+    [EditorField] uint32 Height;
 
-    [Tilemap Height]
-    uint32 Height;
-
-    [Tilemap Data]
-    List<uint8> Map;
+    [Tilemap]
+    [EditorField] array<uint32> Map;
 
     bool Paused = false;
     bool GameOver = false;
@@ -24,6 +21,11 @@ shared class Level
     Level(Entity entity)
     {
         Handle = entity;
+    }
+
+    void OnStart()
+    {
+
     }
 
     void OnUpdate(float ts)

@@ -14,33 +14,34 @@ class PlayScreen : IScreen
                 Entity newEntity;
 
                 if(level.IsWall(tile)) {
-                    newEntity = Scene.CreateFromPrefab("Wall");
+                    // newEntity = Scene.CreateFromPrefab("Wall");
+                    newEntity = Scene.AddEntity();
                     TransformComponent@ tc = newEntity.GetTransformComponent();
                     tc.Translation.x = x;
                     tc.Translation.z = y;
                 }
                 if(level.IsPath(tile)) {
-                    newEntity = Scene.CreateFromPrefab("Path");
+                    // newEntity = Scene.CreateFromPrefab("Path");
 
                 }
                 if(level.IsLava(tile)) {
-                    newEntity = Scene.CreateFromPrefab("Lava");
+                    // newEntity = Scene.CreateFromPrefab("Lava");
 
                 }
                 if(level.IsGoal(tile)) {
-                    newEntity = Scene.CreateFromPrefab("Goal");
+                    // newEntity = Scene.CreateFromPrefab("Goal");
 
                 }
                 if(level.IsStart(tile)) {
-                    newEntity = Scene.CreateFromPrefab("Start");
+                    // newEntity = Scene.CreateFromPrefab("Start");
 
                 }
                 if(level.IsDoor(tile)) {
-                    newEntity = Scene.CreateFromPrefab("Door");
+                    // newEntity = Scene.CreateFromPrefab("Door");
 
                 }
                 if(level.IsCheckpoint(tile)) {
-                    newEntity = Scene.CreateFromPrefab("Checkpoint");
+                    // newEntity = Scene.CreateFromPrefab("Checkpoint");
 
                 }
             }
