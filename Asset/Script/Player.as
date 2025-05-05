@@ -8,6 +8,11 @@ class Player : IEntityController
         Handle = entity;
     }
 
+    void OnStart()
+    {
+
+    }
+
     void OnUpdate(float ts)
     {
         if(MousePressed(Mouse::Left))

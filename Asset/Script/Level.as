@@ -14,6 +14,9 @@ shared class Level : IEntityController
     [Tilemap]
     [EditorField] array<uint32> Map;
 
+    [EditorField] Asset WallAsset;
+    [EditorField] Asset PathAsset;
+
     bool Paused = false;
     bool GameOver = false;
     bool Complete = false;
@@ -25,7 +28,49 @@ shared class Level : IEntityController
 
     void OnStart()
     {
+        for(uint32 y = 0; y < Height; y++) {
+            for(uint32 x = 0; x < Width; x++) {
+                Tile tile;
+                tile.x = x;
+                tile.y = y;
+                Entity newEntity;
 
+                if(IsWall(tile)) {
+                    // newEntity = Scene.CreateFromPrefab("Wall");
+                    newEntity = Scene.NewEntity();
+                    TransformComponent@ tc = newEntity.GetTransformComponent();
+                    tc.Translation.x = x;
+                    tc.Translation.z = y;
+
+                    MeshComponent@ mc = new.AddMeshComponent();
+                    mc.MeshAsset = WallAsset;
+                }
+                if(IsPath(tile)) {
+                    // newEntity = Scene.CreateFromPrefab("Path");
+
+                }
+                if(IsLava(tile)) {
+                    // newEntity = Scene.CreateFromPrefab("Lava");
+
+                }
+                if(IsGoal(tile)) {
+                    // newEntity = Scene.CreateFromPrefab("Goal");
+
+                }
+                if(IsStart(tile)) {
+                    // newEntity = Scene.CreateFromPrefab("Start");
+
+                }
+                if(IsDoor(tile)) {
+                    // newEntity = Scene.CreateFromPrefab("Door");
+
+                }
+                if(IsCheckpoint(tile)) {
+                    // newEntity = Scene.CreateFromPrefab("Checkpoint");
+
+                }
+            }
+        }
     }
 
     void OnUpdate(float ts)

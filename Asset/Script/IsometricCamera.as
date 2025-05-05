@@ -9,20 +9,18 @@ class IsometricCamera : IEntityController
         Handle = handle;
         CameraComponent@ cc = Handle.SetCameraComponent();
 
-        cc.Position =
-            R * Vec3
-                {
-                    sin(radians(45.0f)),
-                    sin(radians(35.264f)),
-                    sin(radians(45.0f))
-                };
-        cc.Direction = -normalize(Position);
-
-        cc.ViewportWidth = 480 * (2.0f / R);
-        cc.ViewportHeight = 270 * (2.0f / R);
+        cc.Position = R * Math::Vec3(sin(radians(45.0f)), sin(radians(35.264f)), sin(radians(45.0f)));
+        cc.Direction = -Math::normalize(cc.Position);
+        cc.Width = 480 * (2.0f / R);
+        cc.Height = 270 * (2.0f / R);
     }
 
-    void OnUpdate()
+    void OnStart()
+    {
+
+    }
+
+    void OnUpdate(float ts)
     {
 
     }
