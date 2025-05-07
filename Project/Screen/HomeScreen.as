@@ -14,6 +14,6 @@ class HomeScreen : IScreen
     void OnUpdate(float ts)
     {
         if(Input::KeyPressed(Key::Enter))
-            App.SwitchScreen("Level");
+            App.SwitchScreen("LevelScreen");
     }
 }

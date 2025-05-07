@@ -3,7 +3,8 @@
 class LevelButton : IUIController
 {
     string ID;
-    uint32 Level;
+
+    [EditorField] uint32 Level;
 
     LevelButton(string id)
     {
@@ -17,6 +18,8 @@ class LevelButton : IUIController
 
     void OnClick()
     {
+        // print("Level: " + Level);
+
         TheMazeIsLava@ app = cast<TheMazeIsLava>(ScriptApp);
         app.GameState.SelectedLevel = Level;
     }

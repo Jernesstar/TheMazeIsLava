@@ -1,13 +1,22 @@
-#include "../Script/Level.as"
+#include "../App/TheMazeIsLava.as"
+
+#include "../../Asset/Script/Level.as"
 
 class PlayScreen : IScreen
 {
+    TheMazeIsLava@ Game;
     Level@ LevelData;
 
     void OnLoad()
     {
-        Entity entity = Scene.FindEntity("LevelData");
-        LevelData = cast<Level>(entity.GetScriptComponent().Instance);
+       @Game = cast<TheMazeIsLava>(ScriptApp);
+        string levelStr = "Level" + Game.GameState.SelectedLevel;
+        print(levelStr);
+        // App.LoadScene(levelStr);
+
+        // Entity entity = Scene.FindEntity("LevelData");
+        // LevelData = cast<Level>(entity.GetScriptComponent().Instance);
+        print("OnLoad");
     }
 
     void OnClose()
@@ -17,13 +26,11 @@ class PlayScreen : IScreen
 
     void OnUpdate(float ts)
     {
-        TheMazeIsLava@ game = cast<TheMazeIsLava>(ScriptApp);
-
         if (LevelData.GameOver)
             UIPage.PushLayer("GameOver");
         else if (LevelData.Complete)
             UIPage.PushLayer("LevelComplete");
-        else if (KeyPressed(Key::Return)) {
+        else if (Input::KeyPressed(Key::Enter)) {
             LevelData.Paused = !LevelData.Paused;
             if(LevelData.Paused)
                 UIPage.PushLayer("Pause");

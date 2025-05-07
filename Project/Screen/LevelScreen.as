@@ -1,3 +1,5 @@
+#include "../App/TheMazeIsLava.as"
+
 class LevelScreen : IScreen
 {
     void OnLoad()
@@ -18,6 +20,6 @@ class LevelScreen : IScreen
         if(game.GameState.SelectedLevel == 0)
             return;
 
-        App.SwitchScreen("Play");
+        App.SwitchScreen("PlayScreen");
     }
 }

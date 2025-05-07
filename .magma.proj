@@ -1,5 +1,5 @@
 Project:
-  ExportPath: C:\Users\Jercy Mukala\Code\TheMazeIsLava\.build
+  ExportPath: C:\Users\JMukala\Code\TheMazeIsLava\.build
   Name: TheMazeIsLava
   App: TheMazeIsLava
   StartScreen: HomeScreen
@@ -8,3 +8,11 @@ Project:
         Name: HomeScreen
         Scene: ""
         UI: Home
+    - Screen:
+        Name: LevelScreen
+        Scene: ""
+        UI: Level
+    - Screen:
+        Name: PlayScreen
+        Scene: ""
+        UI: ""
