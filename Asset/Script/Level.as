@@ -38,11 +38,11 @@ shared class Level : IEntityController
                 if(IsWall(tile)) {
                     // newEntity = Scene.CreateFromPrefab("Wall");
                     newEntity = Scene.NewEntity();
-                    TransformComponent@ tc = newEntity.GetTransformComponent();
+                    TransformComponent@ tc = newEntity.AddTransformComponent();
                     tc.Translation.x = x;
                     tc.Translation.z = y;
 
-                    MeshComponent@ mc = new.AddMeshComponent();
+                    MeshComponent@ mc = newEntity.AddMeshComponent();
                     mc.MeshAsset = WallAsset;
                 }
                 if(IsPath(tile)) {

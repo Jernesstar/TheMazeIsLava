@@ -1,8 +1,9 @@
+
 class HomeScreen : IScreen
 {
     void OnLoad()
     {
-        App.LoadUI("HomeUI");
+        // App.LoadUI("HomeUI");
     }
 
     void OnClose()
@@ -12,7 +13,7 @@ class HomeScreen : IScreen
 
     void OnUpdate(float ts)
     {
-        if(KeyPressed(Key::Return))
+        if(Input::KeyPressed(Key::Enter))
             App.SwitchScreen("Level");
     }
 }

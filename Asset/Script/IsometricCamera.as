@@ -2,22 +2,21 @@
 class IsometricCamera : IEntityController
 {
     Entity Handle;
-    float R;
+    [EditorField] float R;
 
     IsometricCamera(Entity handle)
     {
         Handle = handle;
-        CameraComponent@ cc = Handle.SetCameraComponent();
-
-        cc.Position = R * Math::Vec3(sin(radians(45.0f)), sin(radians(35.264f)), sin(radians(45.0f)));
-        cc.Direction = -Math::normalize(cc.Position);
-        cc.Width = 480 * (2.0f / R);
-        cc.Height = 270 * (2.0f / R);
     }
 
     void OnStart()
     {
+        CameraComponent@ cc = Handle.SetCameraComponent();
 
+        cc.Position = R * sin(radians(Vec3(45.0f, 35.264f, 45.0f)));
+        cc.Direction = -normalize(cc.Position);
+        cc.Width = uint32(480.0f * (2.0f / R));
+        cc.Height = uint32(270.0f * (2.0f / R));
     }
 
     void OnUpdate(float ts)

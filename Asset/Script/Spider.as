@@ -1,11 +1,16 @@
 
 class Spider : IEntityController
 {
-    Entity Handle
+    Entity Handle;
 
     Spider(Entity handle)
     {
         Handle = handle;
+    }
+
+    void OnStart()
+    {
+
     }
 
     void OnUpdate(float ts)

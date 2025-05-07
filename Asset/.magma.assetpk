@@ -15,7 +15,7 @@ AssetPack:
     - Asset:
         ID: 4975861332934482515
         Type: Texture
-        Path: Image/gold.webp
+        Path: Image/gold.png
     - Asset:
         ID: 8808176318344075065
         Type: Mesh
