@@ -16,6 +16,7 @@ shared class Level : IEntityController
 
     [EditorField] Asset WallAsset;
     [EditorField] Asset PathAsset;
+    [EditorField] Asset StairAsset;
 
     bool Paused = false;
     bool GameOver = false;
@@ -41,6 +42,8 @@ shared class Level : IEntityController
                     TransformComponent@ tc = newEntity.AddTransformComponent();
                     tc.Translation.x = x;
                     tc.Translation.z = y;
+                    // tc.Translation.y = 1;
+                    tc.Scale = Vec3(0.08f);
 
                     MeshComponent@ mc = newEntity.AddMeshComponent();
                     mc.MeshAsset = WallAsset;
@@ -64,6 +67,13 @@ shared class Level : IEntityController
                 else if (IsGoal(tile)) {
                     // newEntity = Scene.CreateFromPrefab("Goal");
 
+                    newEntity = Scene.NewEntity();
+                    TransformComponent@ tc = newEntity.AddTransformComponent();
+                    tc.Translation.x = x;
+                    tc.Translation.z = y;
+
+                    MeshComponent@ mc = newEntity.AddMeshComponent();
+                    mc.MeshAsset = StairAsset;
                 }
                 else if (IsCheckpoint(tile)) {
                     // newEntity = Scene.CreateFromPrefab("Checkpoint");

@@ -25,13 +25,19 @@ Scene:
                   Name: WallAsset
                   Type: Asset
                   Value:
-                    ID: 9379610506206156467
+                    ID: 8808176318344075065
                     Type: Mesh
               - Field:
                   Name: PathAsset
                   Type: Asset
                   Value:
                     ID: 8808176318344075065
+                    Type: Mesh
+              - Field:
+                  Name: StairAsset
+                  Type: Asset
+                  Value:
+                    ID: 10652487024113119011
                     Type: Mesh
     - Entity:
         Name: Camera
@@ -43,10 +49,10 @@ Scene:
             Camera:
               Type: Stereographic
               VerticalFOV: 45
-              Position: [0, 0, 0]
-              Direction: [0, 0, -1]
-              ViewportWidth: 800
-              ViewportHeight: 600
+              Position: [0.707106769, 0.577344716, 0.707106769]
+              Direction: [-0.612373888, -0.499996394, -0.612373888]
+              ViewportWidth: 331
+              ViewportHeight: 186
               Near: 0.00100000005
               Far: 1000
           ScriptComponent:
@@ -57,3 +63,16 @@ Scene:
                   Name: R
                   Type: float
                   Value: 2.9000001
+    - Entity:
+        Name: Light1
+        ID: 569
+        Components:
+          PointLightComponent:
+            Light:
+              Ambient: [0, 0, 0]
+              Diffuse: [0, 0, 0]
+              Specular: [0, 0, 0]
+              Position: [-5.80000019, 5.30000019, 3.70000005]
+              Constant: 0
+              Linear: 0
+              Quadratic: 0

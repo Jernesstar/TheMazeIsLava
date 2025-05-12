@@ -22,7 +22,16 @@ class IsometricCamera : IEntityController
 
     void OnUpdate(float ts)
     {
+        CameraComponent@ cc = Handle.SetCameraComponent();
 
+        if(Input::KeyPressed(Key::Up))
+            cc.Position += Vec3(0.0f, 0.00005f, 0.0f);
+        if(Input::KeyPressed(Key::Down))
+            cc.Position -= Vec3(0.0f, 0.00005f, 0.0f);
+        if(Input::KeyPressed(Key::Left))
+            cc.Position -= Vec3(0.00005f, 0.0f, 0.0f);
+        if(Input::KeyPressed(Key::Right))
+            cc.Position += Vec3(0.00005f, 0.0f, 0.0f);
     }
 
     void OnKeyEvent(KeyEvent@ event)
