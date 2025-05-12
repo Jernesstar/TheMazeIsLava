@@ -18,8 +18,6 @@ class LevelButton : IUIController
 
     void OnClick()
     {
-        // print("Level: " + Level);
-
         TheMazeIsLava@ app = cast<TheMazeIsLava>(ScriptApp);
         app.GameState.SelectedLevel = Level;
     }

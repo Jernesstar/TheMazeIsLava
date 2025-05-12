@@ -10,18 +10,27 @@ class PlayScreen : IScreen
     void OnLoad()
     {
        @Game = cast<TheMazeIsLava>(ScriptApp);
+
         string levelStr = "Level" + Game.GameState.SelectedLevel;
         print(levelStr);
-        // App.LoadScene(levelStr);
+        App.LoadScene(levelStr);
 
-        // Entity entity = Scene.FindEntity("LevelData");
-        // LevelData = cast<Level>(entity.GetScriptComponent().Instance);
+        Entity entity = Scene.FindEntity("LevelData");
+        if(!entity.IsValid()) {
+            print("Error: No LevelData");
+            return;
+        }
+        else
+            print("Found");
+
+        @LevelData = cast<Level>(entity.SetScriptComponent().Instance);
+        print("Paused: " + LevelData.Paused);
         print("OnLoad");
     }
 
     void OnClose()
     {
-
+        print("OnClose");
     }
 
     void OnUpdate(float ts)

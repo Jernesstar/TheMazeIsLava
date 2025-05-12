@@ -20,19 +20,19 @@ Scene:
               - Field:
                   Name: Map
                   Type: array
-                  Value: [5, 0, 0, 0, 0, 0, 0, 3, 0, 4, 2, 0, 0, 2, 2, 2, 2, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 2, 2, 2, 1, 2, 2, 2, 4, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 0, 4, 2, 2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 4]
+                  Value: [0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
               - Field:
                   Name: WallAsset
                   Type: Asset
                   Value:
-                    ID: 0
-                    Type: 0
+                    ID: 9379610506206156467
+                    Type: Mesh
               - Field:
                   Name: PathAsset
                   Type: Asset
                   Value:
-                    ID: 0
-                    Type: 0
+                    ID: 8808176318344075065
+                    Type: Mesh
     - Entity:
         Name: Camera
         ID: 568
@@ -51,4 +51,9 @@ Scene:
               Far: 1000
           ScriptComponent:
             ModuleID: 15585412503154922005
-            Class: ""
+            Class: IsometricCamera
+            Fields:
+              - Field:
+                  Name: R
+                  Type: float
+                  Value: 2.9000001

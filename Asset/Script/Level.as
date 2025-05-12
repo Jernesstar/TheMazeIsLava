@@ -45,27 +45,27 @@ shared class Level : IEntityController
                     MeshComponent@ mc = newEntity.AddMeshComponent();
                     mc.MeshAsset = WallAsset;
                 }
-                if(IsPath(tile)) {
-                    // newEntity = Scene.CreateFromPrefab("Path");
-
-                }
-                if(IsLava(tile)) {
-                    // newEntity = Scene.CreateFromPrefab("Lava");
-
-                }
-                if(IsGoal(tile)) {
-                    // newEntity = Scene.CreateFromPrefab("Goal");
-
-                }
-                if(IsStart(tile)) {
+                else if (IsStart(tile)) {
                     // newEntity = Scene.CreateFromPrefab("Start");
 
                 }
-                if(IsDoor(tile)) {
-                    // newEntity = Scene.CreateFromPrefab("Door");
+                else if (IsPath(tile)) {
+                    // newEntity = Scene.CreateFromPrefab("Path");
 
                 }
-                if(IsCheckpoint(tile)) {
+                else if (IsCode(tile)) {
+                    // newEntity = Scene.CreateFromPrefab("Code");
+                    
+                }
+                else if (IsLava(tile)) {
+                    // newEntity = Scene.CreateFromPrefab("Lava");
+
+                }
+                else if (IsGoal(tile)) {
+                    // newEntity = Scene.CreateFromPrefab("Goal");
+
+                }
+                else if (IsCheckpoint(tile)) {
                     // newEntity = Scene.CreateFromPrefab("Checkpoint");
 
                 }
@@ -101,23 +101,23 @@ shared class Level : IEntityController
     bool IsWall(const Tile& tile) const {
         return Map[tile.y * Height + tile.x] == 0;
     }
-    bool IsPath(const Tile& tile) const {
+    bool IsStart(const Tile& tile) const {
         return Map[tile.y * Height + tile.x] == 1;
     }
-    bool IsLava(const Tile& tile) const {
+    bool IsPath(const Tile& tile) const {
         return Map[tile.y * Height + tile.x] == 2;
     }
-    bool IsGoal(const Tile& tile) const {
+    bool IsCode(const Tile& tile) {
         return Map[tile.y * Height + tile.x] == 3;
     }
-    bool IsStart(const Tile& tile) const {
+    bool IsLava(const Tile& tile) const {
         return Map[tile.y * Height + tile.x] == 4;
     }
-    bool IsDoor(const Tile& tile) const {
+    bool IsGoal(const Tile& tile) const {
         return Map[tile.y * Height + tile.x] == 5;
     }
     bool IsCheckpoint(const Tile& tile) const {
-        return Map[tile.y * Height + tile.x] == 5;
+        return Map[tile.y * Height + tile.x] == 6;
     }
     bool IsInbounds(const Tile& tile) const {
         return (tile.x < Width) && (tile.y < Height);
