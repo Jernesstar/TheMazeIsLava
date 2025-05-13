@@ -47,12 +47,12 @@ Scene:
             Tag: MainCamera
           CameraComponent:
             Camera:
-              Type: Stereographic
-              VerticalFOV: 45
-              Position: [0.707106769, 0.577344716, 0.707106769]
-              Direction: [-0.612373888, -0.499996394, -0.612373888]
-              ViewportWidth: 331
-              ViewportHeight: 186
+              Type: Orthographic
+              Rotation: 0
+              Position: [0, 0, 0]
+              Direction: [0, 0, -1]
+              ViewportWidth: 800
+              ViewportHeight: 600
               Near: 0.00100000005
               Far: 1000
           ScriptComponent:

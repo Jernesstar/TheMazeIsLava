@@ -11,6 +11,10 @@ class PlayScreen : IScreen
     {
        @Game = cast<TheMazeIsLava>(ScriptApp);
 
+#if EDITOR
+        Game.GameState.SelectedLevel = 1;
+#endif
+
         string levelStr = "Level" + Game.GameState.SelectedLevel;
         print(levelStr);
         App.LoadScene(levelStr);
