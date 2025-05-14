@@ -5,6 +5,8 @@ class IsometricCamera : IEntityController
 
     [EditorField] float R;
 
+    // CameraController Controller;
+
     IsometricCamera(Entity handle)
     {
         Handle = handle;
@@ -13,6 +15,7 @@ class IsometricCamera : IEntityController
     void OnStart()
     {
         CameraComponent@ cc = Handle.SetCameraComponent();
+        // Controller.SetCamera(cc);
 
         cc.Position = R * sin(radians(Vec3(45.0f, 35.264f, 45.0f)));
         cc.Direction = -normalize(cc.Position);
@@ -22,6 +25,8 @@ class IsometricCamera : IEntityController
 
     void OnUpdate(float ts)
     {
+        // Controller.Update(ts);
+
         CameraComponent@ cc = Handle.SetCameraComponent();
 
         if(Input::KeyPressed(Key::Up))

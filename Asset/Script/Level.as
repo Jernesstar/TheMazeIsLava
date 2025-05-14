@@ -4,6 +4,11 @@ shared class Tile
     uint8 x, y;
 }
 
+shared class GameOverEvent : GameEvent
+{
+    string GetID() const { return "GameOver"; }
+}
+
 shared class Level : IEntityController
 {
     Entity Handle;
@@ -37,35 +42,34 @@ shared class Level : IEntityController
                 Entity newEntity;
 
                 if(IsWall(tile)) {
-                    // newEntity = Scene.CreateFromPrefab("Wall");
+                    // newEntity = Scene.NewEntityFromPrefab("Wall");
+                }
+                else if (IsStart(tile)) {
+                    // newEntity = Scene.NewEntityFromPrefab("Start");
+
+                }
+                else if (IsPath(tile)) {
+                    // newEntity = Scene.NewEntityFromPrefab("Path");
                     newEntity = Scene.NewEntity();
                     TransformComponent@ tc = newEntity.AddTransformComponent();
                     tc.Translation.x = x;
                     tc.Translation.z = y;
                     // tc.Translation.y = 1;
-                    tc.Scale = Vec3(0.08f);
+                    tc.Scale = Vec3(0.8f);
 
                     MeshComponent@ mc = newEntity.AddMeshComponent();
-                    mc.MeshAsset = WallAsset;
-                }
-                else if (IsStart(tile)) {
-                    // newEntity = Scene.CreateFromPrefab("Start");
-
-                }
-                else if (IsPath(tile)) {
-                    // newEntity = Scene.CreateFromPrefab("Path");
-
+                    mc.MeshAsset = PathAsset;
                 }
                 else if (IsCode(tile)) {
-                    // newEntity = Scene.CreateFromPrefab("Code");
+                    // newEntity = Scene.NewEntityFromPrefab("Code");
                     
                 }
                 else if (IsLava(tile)) {
-                    // newEntity = Scene.CreateFromPrefab("Lava");
+                    // newEntity = Scene.NewEntityFromPrefab("Lava");
 
                 }
                 else if (IsGoal(tile)) {
-                    // newEntity = Scene.CreateFromPrefab("Goal");
+                    // newEntity = Scene.NewEntityFromPrefab("Goal");
 
                     newEntity = Scene.NewEntity();
                     TransformComponent@ tc = newEntity.AddTransformComponent();
@@ -76,7 +80,7 @@ shared class Level : IEntityController
                     mc.MeshAsset = StairAsset;
                 }
                 else if (IsCheckpoint(tile)) {
-                    // newEntity = Scene.CreateFromPrefab("Checkpoint");
+                    // newEntity = Scene.NewEntityFromPrefab("Checkpoint");
 
                 }
             }
@@ -90,7 +94,17 @@ shared class Level : IEntityController
 
     void OnKeyEvent(KeyEvent@ event)
     {
+        KeyPressedEvent@ e = cast<KeyPressedEvent>(event);
+        if(@e == null)
+            return;
 
+        if (e.Key == Key::Enter) {
+            Paused = !Paused;
+            if(Paused)
+                UIPage.SetLayer("Pause");
+            else
+                UIPage.SetLayer("Root");
+        }
     }
 
     void OnMouseEvent(MouseEvent@ event)
@@ -105,7 +119,14 @@ shared class Level : IEntityController
 
     void OnGameEvent(GameEvent@ event)
     {
-
+        if(event.GetID() == "GameOver") {
+            GameOver = true;
+            UIPage.SetLayer("GameOver");
+        }
+        else if (event.GetID() == "LevelComplete") {
+            Complete = true;
+            UIPage.SetLayer("LevelComplete");
+        }
     }
 
     bool IsWall(const Tile& tile) const {

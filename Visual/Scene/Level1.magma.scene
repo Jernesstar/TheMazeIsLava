@@ -62,7 +62,7 @@ Scene:
               - Field:
                   Name: R
                   Type: float
-                  Value: 2.9000001
+                  Value: 60.0
     - Entity:
         Name: Light1
         ID: 569

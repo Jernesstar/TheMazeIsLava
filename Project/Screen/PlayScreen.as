@@ -39,17 +39,6 @@ class PlayScreen : IScreen
 
     void OnUpdate(float ts)
     {
-        if (LevelData.GameOver)
-            UIPage.PushLayer("GameOver");
-        else if (LevelData.Complete)
-            UIPage.PushLayer("LevelComplete");
-        else if (Input::KeyPressed(Key::Enter)) {
-            LevelData.Paused = !LevelData.Paused;
-            if(LevelData.Paused)
-                UIPage.PushLayer("Pause");
-            else
-                UIPage.PopLayer();
-        }
-    }
 
+    }
 }
