@@ -19,10 +19,12 @@ AssetPack:
     - Asset:
         ID: 8808176318344075065
         Type: Mesh
+        Name: Torch
         Path: Mesh/torch/torch.obj
     - Asset:
         ID: 9135859329569859042
         Type: Mesh
+        Name: Player
         Path: Mesh/player/Knight_Golden_Male.obj
     - Asset:
         ID: 9379610506206156467
@@ -31,6 +33,7 @@ AssetPack:
     - Asset:
         ID: 10652487024113119011
         Type: Mesh
+        Name: Stairs
         Path: Mesh/stairs/stairs.obj
     - Asset:
         ID: 11133238322135416622
@@ -56,6 +59,15 @@ AssetPack:
         ID: 16730603527850583685
         Type: Texture
         Path: Image/dirt.jpeg
+    - Asset:
+        ID: 16730603534091583685
+        Type: Mesh
+        Name: Wall
+        MeshType: 1
+        Material:
+          DiffuseColor: [0, 1, 0, 1]
+          SpecularColor: [0, 0, 0, 0]
+          EmissiveColor: [0, 0, 0, 0]
     - Asset:
         ID: 17930437727414257517
         Type: Script

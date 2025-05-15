@@ -2,6 +2,14 @@
 shared class Tile
 {
     uint8 x, y;
+
+    Tile() { }
+
+    Tile(uint8 x, uint8 y)
+    {
+        this.x = x;
+        this.y = y;
+    }
 }
 
 shared class GameOverEvent : GameEvent
@@ -19,10 +27,6 @@ shared class Level : IEntityController
     [Tilemap]
     [EditorField] array<uint32> Map;
 
-    [EditorField] Asset WallAsset;
-    [EditorField] Asset PathAsset;
-    [EditorField] Asset StairAsset;
-
     bool Paused = false;
     bool GameOver = false;
     bool Complete = false;
@@ -34,8 +38,15 @@ shared class Level : IEntityController
 
     void OnStart()
     {
-        for(uint32 y = 0; y < Height; y++) {
-            for(uint32 x = 0; x < Width; x++) {
+        Asset WallAsset = AssetManager.GetNamedAsset("Wall");
+        Asset TorchAsset = AssetManager.GetNamedAsset("Torch");
+        Asset StairAsset = AssetManager.GetNamedAsset("Stairs");
+        Asset PlayerAsset = AssetManager.GetNamedAsset("Player");
+
+        print("Here");
+
+        for(uint8 y = 0; y < uint8(Height); y++) {
+            for(uint8 x = 0; x < uint8(Width); x++) {
                 Tile tile;
                 tile.x = x;
                 tile.y = y;
@@ -43,22 +54,48 @@ shared class Level : IEntityController
 
                 if(IsWall(tile)) {
                     // newEntity = Scene.NewEntityFromPrefab("Wall");
-                }
-                else if (IsStart(tile)) {
-                    // newEntity = Scene.NewEntityFromPrefab("Start");
 
-                }
-                else if (IsPath(tile)) {
-                    // newEntity = Scene.NewEntityFromPrefab("Path");
                     newEntity = Scene.NewEntity();
                     TransformComponent@ tc = newEntity.AddTransformComponent();
                     tc.Translation.x = x;
                     tc.Translation.z = y;
                     // tc.Translation.y = 1;
-                    tc.Scale = Vec3(0.8f);
-
                     MeshComponent@ mc = newEntity.AddMeshComponent();
-                    mc.MeshAsset = PathAsset;
+                    mc.MeshAsset = WallAsset;
+
+                    Entity light = Scene.NewEntity();
+                    TransformComponent@ tc2 = light.AddTransformComponent();
+                    tc2.Translation.x = x;
+                    tc2.Translation.z = y;
+                    // tc.Translation.y = 1;
+                    tc2.Scale = Vec3(0.7f);
+
+                    auto back = Tile(x, y - 1);
+                    auto left = Tile(x - 1, y);
+                    auto right = Tile(x + 1, y);
+                    auto front = Tile(x, y + 1);
+                    if(IsInbounds(front) && IsPath(front)) {
+                        tc2.Rotation.x = radians(25.0f);
+                        tc2.Translation.z += 0.5f;
+                    }
+
+                    MeshComponent@ mc2 = light.AddMeshComponent();
+                    mc2.MeshAsset = TorchAsset;
+                }
+                else if (IsStart(tile)) {
+                    // newEntity = Scene.NewEntityFromPrefab("Start");
+
+                    newEntity = Scene.NewEntity();
+                    TransformComponent@ tc = newEntity.AddTransformComponent();
+                    tc.Translation.x = x;
+                    tc.Translation.z = y;
+                    // tc.Translation.y = 1;
+                    // MeshComponent@ mc = newEntity.AddMeshComponent();
+                    // mc.MeshAsset = PlayerAsset;
+                }
+                else if (IsPath(tile)) {
+                    // newEntity = Scene.NewEntityFromPrefab("Path");
+
                 }
                 else if (IsCode(tile)) {
                     // newEntity = Scene.NewEntityFromPrefab("Code");
@@ -75,6 +112,7 @@ shared class Level : IEntityController
                     TransformComponent@ tc = newEntity.AddTransformComponent();
                     tc.Translation.x = x;
                     tc.Translation.z = y;
+                    tc.Scale = Vec3(0.5f);
 
                     MeshComponent@ mc = newEntity.AddMeshComponent();
                     mc.MeshAsset = StairAsset;

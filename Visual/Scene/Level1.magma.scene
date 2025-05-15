@@ -20,25 +20,7 @@ Scene:
               - Field:
                   Name: Map
                   Type: array
-                  Value: [0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-              - Field:
-                  Name: WallAsset
-                  Type: Asset
-                  Value:
-                    ID: 8808176318344075065
-                    Type: Mesh
-              - Field:
-                  Name: PathAsset
-                  Type: Asset
-                  Value:
-                    ID: 8808176318344075065
-                    Type: Mesh
-              - Field:
-                  Name: StairAsset
-                  Type: Asset
-                  Value:
-                    ID: 10652487024113119011
-                    Type: Mesh
+                  Value: [0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     - Entity:
         Name: Camera
         ID: 568
@@ -49,10 +31,10 @@ Scene:
             Camera:
               Type: Orthographic
               Rotation: 0
-              Position: [0, 0, 0]
-              Direction: [0, 0, -1]
-              ViewportWidth: 800
-              ViewportHeight: 600
+              Position: [42.4264069, 34.6406822, 42.4264069]
+              Direction: [-0.612373948, -0.499996424, -0.612373948]
+              ViewportWidth: 16
+              ViewportHeight: 9
               Near: 0.00100000005
               Far: 1000
           ScriptComponent:
@@ -62,7 +44,7 @@ Scene:
               - Field:
                   Name: R
                   Type: float
-                  Value: 60.0
+                  Value: 60
     - Entity:
         Name: Light1
         ID: 569
