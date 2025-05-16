@@ -52,9 +52,9 @@ Scene:
           PointLightComponent:
             Light:
               Ambient: [0, 0, 0]
-              Diffuse: [0, 0, 0]
-              Specular: [0, 0, 0]
-              Position: [-5.80000019, 5.30000019, 3.70000005]
-              Constant: 0
+              Diffuse: [1, 1, 1]
+              Specular: [1, 1, 1]
+              Position: [0, 8.10000038, 0]
+              Constant: 1
               Linear: 0
               Quadratic: 0
