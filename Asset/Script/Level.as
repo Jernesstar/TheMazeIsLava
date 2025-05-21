@@ -43,8 +43,6 @@ shared class Level : IEntityController
         Asset StairAsset = AssetManager.GetNamedAsset("Stairs");
         Asset PlayerAsset = AssetManager.GetNamedAsset("Player");
 
-        print("Here");
-
         for(uint8 y = 0; y < uint8(Height); y++) {
             for(uint8 x = 0; x < uint8(Width); x++) {
                 Tile tile;
@@ -63,24 +61,27 @@ shared class Level : IEntityController
                     MeshComponent@ mc = newEntity.AddMeshComponent();
                     mc.MeshAsset = WallAsset;
 
-                    Entity light = Scene.NewEntity();
-                    TransformComponent@ tc2 = light.AddTransformComponent();
-                    tc2.Translation.x = x;
-                    tc2.Translation.z = y;
-                    // tc.Translation.y = 1;
-                    tc2.Scale = Vec3(0.7f);
-
                     auto back = Tile(x, y - 1);
                     auto left = Tile(x - 1, y);
                     auto right = Tile(x + 1, y);
                     auto front = Tile(x, y + 1);
+                    Entity light;
                     if(IsInbounds(front) && IsPath(front)) {
+                        light = Scene.NewEntity();
+                        TransformComponent@ tc2 = light.AddTransformComponent();
+                        tc2.Translation.x = x;
+                        tc2.Translation.z = y;
+                        // tc.Translation.y = 1;
+                        tc2.Scale = Vec3(0.5f);
+
                         tc2.Rotation.x = radians(25.0f);
                         tc2.Translation.z += 0.5f;
                     }
 
-                    MeshComponent@ mc2 = light.AddMeshComponent();
-                    mc2.MeshAsset = TorchAsset;
+                    if(light.IsValid()) {
+                        MeshComponent@ mc2 = light.AddMeshComponent();
+                        mc2.MeshAsset = TorchAsset;
+                    }
                 }
                 else if (IsStart(tile)) {
                     // newEntity = Scene.NewEntityFromPrefab("Start");
@@ -168,25 +169,25 @@ shared class Level : IEntityController
     }
 
     bool IsWall(const Tile& tile) const {
-        return Map[tile.y * Height + tile.x] == 0;
-    }
-    bool IsStart(const Tile& tile) const {
         return Map[tile.y * Height + tile.x] == 1;
     }
-    bool IsPath(const Tile& tile) const {
+    bool IsStart(const Tile& tile) const {
         return Map[tile.y * Height + tile.x] == 2;
     }
-    bool IsCode(const Tile& tile) {
+    bool IsPath(const Tile& tile) const {
         return Map[tile.y * Height + tile.x] == 3;
     }
-    bool IsLava(const Tile& tile) const {
+    bool IsCode(const Tile& tile) {
         return Map[tile.y * Height + tile.x] == 4;
     }
-    bool IsGoal(const Tile& tile) const {
+    bool IsLava(const Tile& tile) const {
         return Map[tile.y * Height + tile.x] == 5;
     }
-    bool IsCheckpoint(const Tile& tile) const {
+    bool IsGoal(const Tile& tile) const {
         return Map[tile.y * Height + tile.x] == 6;
+    }
+    bool IsCheckpoint(const Tile& tile) const {
+        return Map[tile.y * Height + tile.x] == 7;
     }
     bool IsInbounds(const Tile& tile) const {
         return (tile.x < Width) && (tile.y < Height);

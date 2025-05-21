@@ -18,6 +18,7 @@ class PlayScreen : IScreen
         string levelStr = "Level" + Game.GameState.SelectedLevel;
         print(levelStr);
         App.LoadScene(levelStr);
+        print("Here");
 
         Entity entity = Scene.FindEntity("LevelData");
         if(!entity.IsValid()) {
