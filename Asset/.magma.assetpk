@@ -65,8 +65,8 @@ AssetPack:
         Name: Wall
         MeshType: 1
         Material:
-          DiffuseColor: [0, 1, 0, 1]
-          SpecularColor: [1, 1, 1, 1]
+          DiffuseColor: [0, 0, 1, 1]
+          SpecularColor: [0, 0, 0, 0]
           EmissiveColor: [0, 0, 0, 0]
     - Asset:
         ID: 17930437727414257517

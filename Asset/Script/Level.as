@@ -42,6 +42,9 @@ shared class Level : IEntityController
         Asset TorchAsset = AssetManager.GetNamedAsset("Torch");
         Asset StairAsset = AssetManager.GetNamedAsset("Stairs");
         Asset PlayerAsset = AssetManager.GetNamedAsset("Player");
+        if(!WallAsset.IsValid or !TorchAsset.IsValid
+        or !StairAsset.IsValid or !PlayerAsset.IsValid)
+            return;
 
         for(uint8 y = 0; y < uint8(Height); y++) {
             for(uint8 x = 0; x < uint8(Width); x++) {
@@ -66,7 +69,7 @@ shared class Level : IEntityController
                     auto right = Tile(x + 1, y);
                     auto front = Tile(x, y + 1);
                     Entity light;
-                    if(IsInbounds(front) && IsPath(front)) {
+                    if(IsInbounds(front) and IsPath(front)) {
                         light = Scene.NewEntity();
                         TransformComponent@ tc2 = light.AddTransformComponent();
                         tc2.Translation.x = x;
@@ -74,7 +77,7 @@ shared class Level : IEntityController
                         // tc.Translation.y = 1;
                         tc2.Scale = Vec3(0.5f);
 
-                        tc2.Rotation.x = radians(25.0f);
+                        tc2.Rotation.x = radians(27.0f);
                         tc2.Translation.z += 0.5f;
                     }
 
