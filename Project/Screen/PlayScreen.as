@@ -16,21 +16,20 @@ class PlayScreen : IScreen
 #endif
 
         string levelStr = "Level" + Game.GameState.SelectedLevel;
-        print(levelStr);
-        App.LoadScene(levelStr);
-        print("Here");
+        // print(levelStr);
+        // App.LoadScene(levelStr);
+        // print("Here");
 
-        Entity entity = Scene.FindEntity("LevelData");
-        if(!entity.IsValid()) {
-            print("Error: No LevelData");
-            return;
-        }
-        else
-            print("Found");
+        // Entity entity = Scene.FindEntity("LevelData");
+        // if(!entity.IsValid) {
+        //     print("Error: No LevelData");
+        //     return;
+        // }
+        // else
+        //     print("Found");
 
-        @LevelData = cast<Level>(entity.SetScriptComponent().Instance);
-        print("Paused: " + LevelData.Paused);
-        print("OnLoad");
+        // @LevelData = cast<Level>(entity.SetScriptComponent().Instance);
+        // print("OnLoad");
     }
 
     void OnClose()

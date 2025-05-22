@@ -51,16 +51,10 @@ Scene:
         Components:
           PointLightComponent:
             Light:
-              Ambient: [0, 0, 0]
+              Ambient: [1, 1, 1]
               Diffuse: [1, 1, 1]
               Specular: [1, 1, 1]
-              Position: [0, 8.10000038, 0]
+              Position: [-2.4000001, 6.5999999, 3.70000005]
               Constant: 1
               Linear: 0
               Quadratic: 0
-    - Entity:
-        Name: NewEntity
-        ID: 570
-        Components:
-          MeshComponent:
-            AssetID: 16730603534091583685

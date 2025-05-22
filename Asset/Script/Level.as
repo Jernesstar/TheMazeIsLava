@@ -78,12 +78,13 @@ shared class Level : IEntityController
                         tc2.Scale = Vec3(0.5f);
 
                         tc2.Rotation.x = radians(27.0f);
-                        tc2.Translation.z += 0.5f;
+                        tc2.Translation.z += 0.8f;
                     }
 
-                    if(light.IsValid()) {
+                    if(light.IsValid) {
                         MeshComponent@ mc2 = light.AddMeshComponent();
                         mc2.MeshAsset = TorchAsset;
+                        print("Here2");
                     }
                 }
                 else if (IsStart(tile)) {
