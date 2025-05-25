@@ -3,7 +3,7 @@ Scene:
   Entities:
     - Entity:
         Name: LevelData
-        ID: 566
+        ID: 10230593032
         Components:
           ScriptComponent:
             ModuleID: 17930437727414257517
@@ -12,18 +12,18 @@ Scene:
               - Field:
                   Name: Width
                   Type: uint32
-                  Value: 9
+                  Value: 5
               - Field:
                   Name: Height
                   Type: uint32
-                  Value: 9
+                  Value: 5
               - Field:
                   Name: Map
                   Type: array
-                  Value: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+                  Value: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0]
     - Entity:
         Name: Camera
-        ID: 568
+        ID: 139059476110
         Components:
           TagComponent:
             Tag: MainCamera
@@ -47,7 +47,7 @@ Scene:
                   Value: 60
     - Entity:
         Name: Light1
-        ID: 569
+        ID: 562495209059
         Components:
           PointLightComponent:
             Light:
