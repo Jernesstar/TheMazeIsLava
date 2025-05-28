@@ -17,7 +17,7 @@ shared class GameOverEvent : GameEvent
     string GetID() const { return "GameOver"; }
 }
 
-shared class Level : IEntityController
+class Level : IEntityController
 {
     Entity Handle;
 

@@ -19,17 +19,6 @@ class PlayScreen : IScreen
         // print(levelStr);
         // App.LoadScene(levelStr);
         // print("Here");
-
-        // Entity entity = Scene.FindEntity("LevelData");
-        // if(!entity.IsValid) {
-        //     print("Error: No LevelData");
-        //     return;
-        // }
-        // else
-        //     print("Found");
-
-        // @LevelData = cast<Level>(entity.SetScriptComponent().Instance);
-        // print("OnLoad");
     }
 
     void OnClose()
