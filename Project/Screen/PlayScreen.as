@@ -1,11 +1,8 @@
 #include "../App/TheMazeIsLava.as"
 
-#include "../../Asset/Script/Level.as"
-
 class PlayScreen : IScreen
 {
     TheMazeIsLava@ Game;
-    Level@ LevelData;
 
     void OnLoad()
     {
@@ -14,11 +11,9 @@ class PlayScreen : IScreen
 #if EDITOR
         Game.GameState.SelectedLevel = 1;
 #endif
-
         string levelStr = "Level" + Game.GameState.SelectedLevel;
-        // print(levelStr);
-        // App.LoadScene(levelStr);
-        // print("Here");
+        print(levelStr);
+        App.LoadScene(levelStr);
     }
 
     void OnClose()

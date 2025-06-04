@@ -1,5 +1,5 @@
 
-shared class IsometricCamera : IEntityController
+class IsometricCamera : IEntityController
 {
     Entity Handle;
 

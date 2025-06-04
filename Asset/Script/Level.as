@@ -1,5 +1,5 @@
 
-shared class Tile
+class Tile
 {
     uint8 x, y;
 
@@ -12,7 +12,7 @@ shared class Tile
     }
 }
 
-shared class GameOverEvent : GameEvent
+class GameOverEvent : GameEvent
 {
     string GetID() const { return "GameOver"; }
 }
@@ -78,7 +78,10 @@ class Level : IEntityController
                         tc2.Scale = Vec3(0.5f);
 
                         tc2.Rotation.x = radians(20.0f);
-                        tc2.Translation.z += 1.5f;
+                        tc2.Translation.z += 0.5f;
+
+                        // ParticleEmitterComponent@ pc = light.AddParticleEmitterComponent();
+
                     }
 
                     if(light.IsValid) {
