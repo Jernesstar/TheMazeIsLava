@@ -7,20 +7,6 @@ Scene:
         Components:
           ScriptComponent:
             ModuleID: 17930437727414257517
-            Class: Level
-            Fields:
-              - Field:
-                  Name: Width
-                  Type: uint32
-                  Value: 5
-              - Field:
-                  Name: Height
-                  Type: uint32
-                  Value: 5
-              - Field:
-                  Name: Map
-                  Type: array
-                  Value: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0]
     - Entity:
         Name: Camera
         ID: 139059476110
@@ -58,3 +44,4 @@ Scene:
               Constant: 1
               Linear: 0
               Quadratic: 0
+              Bloom: true

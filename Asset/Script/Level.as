@@ -1,11 +1,11 @@
 
 class Tile
 {
-    uint8 x, y;
+    uint32 x, y;
 
     Tile() { }
 
-    Tile(uint8 x, uint8 y)
+    Tile(uint32 x, uint32 y)
     {
         this.x = x;
         this.y = y;
@@ -21,11 +21,8 @@ class Level : IEntityController
 {
     Entity Handle;
 
-    [EditorField] uint32 Width;
-    [EditorField] uint32 Height;
-
-    [Tilemap]
-    [EditorField] array<uint32> Map;
+    [EditorField]
+    GridSet Grid;
 
     bool Paused = false;
     bool GameOver = false;
@@ -44,16 +41,22 @@ class Level : IEntityController
         Asset PlayerAsset = AssetManager.GetNamedAsset("Player");
         if(!WallAsset.IsValid or !TorchAsset.IsValid
         or !StairAsset.IsValid or !PlayerAsset.IsValid)
+        {
+            print("Could not find all needed assets");
             return;
+        }
 
-        for(uint8 y = 0; y < uint8(Height); y++) {
-            for(uint8 x = 0; x < uint8(Width); x++) {
+        for(uint32 y = 0; y < Grid.Height; y++)
+        {
+            for(uint32 x = 0; x < Grid.Width; x++)
+            {
                 Tile tile;
                 tile.x = x;
                 tile.y = y;
                 Entity newEntity;
 
-                if(IsWall(tile)) {
+                if(IsWall(tile))
+                {
                     // newEntity = Scene.NewEntityFromPrefab("Wall");
 
                     newEntity = Scene.NewEntity();
@@ -69,7 +72,8 @@ class Level : IEntityController
                     auto right = Tile(x + 1, y);
                     auto front = Tile(x, y + 1);
                     Entity light;
-                    if(IsInbounds(front) and IsPath(front)) {
+                    if(IsInbounds(front) and IsPath(front))
+                    {
                         light = Scene.NewEntity();
                         TransformComponent@ tc2 = light.AddTransformComponent();
                         tc2.Translation.x = x;
@@ -84,12 +88,14 @@ class Level : IEntityController
 
                     }
 
-                    if(light.IsValid) {
+                    if(light.IsValid)
+                    {
                         MeshComponent@ mc2 = light.AddMeshComponent();
                         mc2.MeshAsset = TorchAsset;
                     }
                 }
-                else if (IsStart(tile)) {
+                else if (IsStart(tile))
+                {
                     // newEntity = Scene.NewEntityFromPrefab("Start");
 
                     newEntity = Scene.NewEntity();
@@ -100,19 +106,23 @@ class Level : IEntityController
                     // MeshComponent@ mc = newEntity.AddMeshComponent();
                     // mc.MeshAsset = PlayerAsset;
                 }
-                else if (IsPath(tile)) {
+                else if (IsPath(tile))
+                {
                     // newEntity = Scene.NewEntityFromPrefab("Path");
 
                 }
-                else if (IsCode(tile)) {
+                else if (IsCode(tile))
+                {
                     // newEntity = Scene.NewEntityFromPrefab("Code");
                     
                 }
-                else if (IsLava(tile)) {
+                else if (IsLava(tile))
+                {
                     // newEntity = Scene.NewEntityFromPrefab("Lava");
 
                 }
-                else if (IsGoal(tile)) {
+                else if (IsGoal(tile))
+                {
                     // newEntity = Scene.NewEntityFromPrefab("Goal");
 
                     newEntity = Scene.NewEntity();
@@ -124,7 +134,8 @@ class Level : IEntityController
                     MeshComponent@ mc = newEntity.AddMeshComponent();
                     mc.MeshAsset = StairAsset;
                 }
-                else if (IsCheckpoint(tile)) {
+                else if (IsCheckpoint(tile))
+                {
                     // newEntity = Scene.NewEntityFromPrefab("Checkpoint");
 
                 }
@@ -143,7 +154,8 @@ class Level : IEntityController
         if(@e == null)
             return;
 
-        if (e.Key == Key::Enter) {
+        if (e.Key == Key::Enter)
+        {
             Paused = !Paused;
             if(Paused)
                 UIPage.SetLayer("Pause");
@@ -164,38 +176,47 @@ class Level : IEntityController
 
     void OnGameEvent(GameEvent@ event)
     {
-        if(event.GetID() == "GameOver") {
+        if(event.GetID() == "GameOver")
+        {
             GameOver = true;
             UIPage.SetLayer("GameOver");
         }
-        else if (event.GetID() == "LevelComplete") {
+        else if (event.GetID() == "LevelComplete")
+        {
             Complete = true;
             UIPage.SetLayer("LevelComplete");
         }
     }
 
-    bool IsWall(const Tile& tile) const {
-        return Map[tile.y * Height + tile.x] == 1;
+    bool IsWall(const Tile& tile) const
+    {
+        return Grid.At(tile.x, tile.y) == 1;
     }
-    bool IsStart(const Tile& tile) const {
-        return Map[tile.y * Height + tile.x] == 2;
+    bool IsStart(const Tile& tile) const
+    {
+        return Grid.At(tile.x, tile.y) == 2;
     }
-    bool IsPath(const Tile& tile) const {
-        return Map[tile.y * Height + tile.x] == 3;
+    bool IsPath(const Tile& tile) const
+    {
+        return Grid.At(tile.x, tile.y) == 3;
     }
     bool IsCode(const Tile& tile) {
-        return Map[tile.y * Height + tile.x] == 4;
+        return Grid.At(tile.x, tile.y) == 4;
     }
-    bool IsLava(const Tile& tile) const {
-        return Map[tile.y * Height + tile.x] == 5;
+    bool IsLava(const Tile& tile) const
+    {
+        return Grid.At(tile.x, tile.y) == 5;
     }
-    bool IsGoal(const Tile& tile) const {
-        return Map[tile.y * Height + tile.x] == 6;
+    bool IsGoal(const Tile& tile) const
+    {
+        return Grid.At(tile.x, tile.y) == 6;
     }
-    bool IsCheckpoint(const Tile& tile) const {
-        return Map[tile.y * Height + tile.x] == 7;
+    bool IsCheckpoint(const Tile& tile) const
+    {
+        return Grid.At(tile.x, tile.y) == 7;
     }
-    bool IsInbounds(const Tile& tile) const {
-        return (tile.x < Width) && (tile.y < Height);
+    bool IsInbounds(const Tile& tile) const
+    {
+        return (tile.x < Grid.Width) && (tile.y < Grid.Height);
     }
 }
