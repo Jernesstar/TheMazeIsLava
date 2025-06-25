@@ -11,7 +11,7 @@ class PlayScreen : IScreen
 #if EDITOR
         Game.GameState.SelectedLevel = 1;
 #endif
-        string levelStr = "Level" + Game.GameState.SelectedLevel;
+        string levelStr = "Level" + Game.GameStabte.SelectedLevel;
         print(levelStr);
         App.LoadScene(levelStr);
     }
