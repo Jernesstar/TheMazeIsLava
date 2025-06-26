@@ -27,6 +27,8 @@ class Level : IEntityController
     bool Paused = false;
     bool GameOver = false;
     bool Complete = false;
+    array<Tile> LavaPoints;
+    Timer LavaTimer;
 
     Level(Entity entity)
     {
@@ -35,6 +37,9 @@ class Level : IEntityController
 
     void OnStart()
     {
+        LavaTimer = Timer(TimerType::Repeat, 2000); // 2 seconds
+        LavaTimer.SetCallback(LavaUpdate);
+
         Asset StartAsset = AssetManager.GetNamedAsset("StartMaterial");
         Asset WallAsset = AssetManager.GetNamedAsset("WallMaterial");
         Asset PathAsset = AssetManager.GetNamedAsset("PathMaterial");
@@ -42,8 +47,8 @@ class Level : IEntityController
         Asset CodeAsset = AssetManager.GetNamedAsset("Code");
         Asset DoorAsset = AssetManager.GetNamedAsset("Door");
         Asset StairAsset = AssetManager.GetNamedAsset("Stairs");
+        Asset LavaAsset = AssetManager.GetNamedAsset("LavaMaterial");
         // Asset CheckpointAsset = AssetManager.GetNamedAsset("Checkpoint");
-        Asset PlayerAsset = AssetManager.GetNamedAsset("Player");
 
         for(uint32 y = 0; y < Grid.Height; y++)
         {
@@ -53,7 +58,8 @@ class Level : IEntityController
                 tile.x = x;
                 tile.y = y;
                 Entity newEntity;
-                if(Grid.At(x, y) == 0)
+
+                if(IsSpace(tile))
                     continue;
 
                 newEntity = Scene.NewEntity();
@@ -146,6 +152,12 @@ class Level : IEntityController
     
                     // FluidMeshComponent@ fc = newEntity.AddFluidMeshComponent();
                     // fc.MaterialAsset = LavaAsset;
+
+                    MeshComponent@ mc = newEntity.AddMeshComponent();
+                    mc.MeshSourceAsset = AssetManager.GetNativeAsset("Cube");
+                    mc.MaterialAsset = LavaAsset;
+
+                    LavaPoints.insertLast(tile);
                 }
                 else if (IsCheckpoint(tile))
                 {
@@ -160,7 +172,15 @@ class Level : IEntityController
 
     void OnUpdate(float ts)
     {
-        // Propagate lava
+        LavaTimer.Tick(ts);
+    }
+
+    void LavaUpdate(float ts)
+    {
+        array<Tile> lava = LavaPoints;
+        for(uint32 i = 0; i < LavaPoints.length(); i++) {
+            
+        }
     }
 
     void OnKeyEvent(KeyEvent@ event)
@@ -203,6 +223,10 @@ class Level : IEntityController
         }
     }
 
+    bool IsSpace(const Tile& tile) const
+    {
+        return Grid.At(tile.x, tile.y) == 0;
+    }
     bool IsStart(const Tile& tile) const
     {
         return Grid.At(tile.x, tile.y) == 1;
