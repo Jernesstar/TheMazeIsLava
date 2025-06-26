@@ -9,6 +9,35 @@ AssetPack:
         Type: Script
         Path: Script/Player.as
     - Asset:
+        ID: 1857530080466215936
+        Type: Material
+        Name: WallMaterial
+        Material:
+          IntUniforms:
+            []
+          FloatUniforms:
+            []
+          Vec2Uniforms:
+            []
+          Vec3Uniforms:
+            []
+          Vec4Uniforms:
+            []
+          Mat2Uniforms:
+            []
+          Mat3Uniforms:
+            []
+          Mat4Uniforms:
+            []
+          TextureUniforms:
+            - Uniform:
+                Name: u_Diffuse
+                Data: 11133238322135416622
+    - Asset:
+        ID: 3853931722673808928
+        Type: Mesh
+        Path: Mesh/obelisk/obelisk.obj
+    - Asset:
         ID: 4784818156094493288
         Type: Script
         Path: Script/Spider.as
@@ -16,6 +45,64 @@ AssetPack:
         ID: 4975861332934482515
         Type: Texture
         Path: Image/gold.png
+    - Asset:
+        ID: 5530177294566290275
+        Type: Audio
+        Path: Audio/Main.mp3
+    - Asset:
+        ID: 5571663067799453258
+        Type: Audio
+        Path: Audio/MovingLava.mp3
+    - Asset:
+        ID: 7030241800714550060
+        Type: Material
+        Name: PathMaterial
+        Material:
+          IntUniforms:
+            []
+          FloatUniforms:
+            []
+          Vec2Uniforms:
+            []
+          Vec3Uniforms:
+            []
+          Vec4Uniforms:
+            []
+          Mat2Uniforms:
+            []
+          Mat3Uniforms:
+            []
+          Mat4Uniforms:
+            []
+          TextureUniforms:
+            - Uniform:
+                Name: u_Diffuse
+                Data: 16730603527850583685
+    - Asset:
+        ID: 7126091231916161915
+        Type: Material
+        Name: LavaMaterial
+        Material:
+          IntUniforms:
+            []
+          FloatUniforms:
+            []
+          Vec2Uniforms:
+            []
+          Vec3Uniforms:
+            []
+          Vec4Uniforms:
+            []
+          Mat2Uniforms:
+            []
+          Mat3Uniforms:
+            []
+          Mat4Uniforms:
+            []
+          TextureUniforms:
+            - Uniform:
+                Name: u_Diffuse
+                Data: 15673016010349369343
     - Asset:
         ID: 8808176318344075065
         Type: Mesh
@@ -31,10 +118,39 @@ AssetPack:
         Type: Mesh
         Path: Mesh/rocks/rocks.obj
     - Asset:
+        ID: 9523074220259771248
+        Type: Material
+        Name: StartMaterial
+        Material:
+          IntUniforms:
+            []
+          FloatUniforms:
+            []
+          Vec2Uniforms:
+            []
+          Vec3Uniforms:
+            []
+          Vec4Uniforms:
+            []
+          Mat2Uniforms:
+            []
+          Mat3Uniforms:
+            []
+          Mat4Uniforms:
+            []
+          TextureUniforms:
+            - Uniform:
+                Name: u_Diffuse
+                Data: 4975861332934482515
+    - Asset:
         ID: 10652487024113119011
         Type: Mesh
         Name: Stairs
         Path: Mesh/stairs/stairs.obj
+    - Asset:
+        ID: 10843416707759182410
+        Type: Audio
+        Path: Audio/Death.mp3
     - Asset:
         ID: 11133238322135416622
         Type: Texture
@@ -59,11 +175,6 @@ AssetPack:
         ID: 16730603527850583685
         Type: Texture
         Path: Image/dirt.jpeg
-    - Asset:
-        ID: 16730603534091583685
-        Type: Mesh
-        Name: Wall
-        MeshType: 1
     - Asset:
         ID: 17930437727414257517
         Type: Script

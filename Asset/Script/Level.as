@@ -28,7 +28,7 @@ class Level : IEntityController
     bool GameOver = false;
     bool Complete = false;
     array<Tile> LavaPoints;
-    Timer LavaTimer;
+    // Timer LavaTimer;
 
     Level(Entity entity)
     {
@@ -37,15 +37,16 @@ class Level : IEntityController
 
     void OnStart()
     {
-        LavaTimer = Timer(TimerType::Repeat, 2000); // 2 seconds
-        LavaTimer.SetCallback(LavaUpdate);
+        // LavaTimer = Timer(TimerType::Repeat, 2000); // 2 seconds
+        // LavaTimer.SetCallback(LavaUpdate);
 
         Asset StartAsset = AssetManager.GetNamedAsset("StartMaterial");
         Asset WallAsset = AssetManager.GetNamedAsset("WallMaterial");
         Asset PathAsset = AssetManager.GetNamedAsset("PathMaterial");
         Asset TorchAsset = AssetManager.GetNamedAsset("Torch");
         Asset CodeAsset = AssetManager.GetNamedAsset("Code");
-        Asset DoorAsset = AssetManager.GetNamedAsset("Door");
+        // Asset DoorAsset = AssetManager.GetNamedAsset("Door");
+        Asset DoorAsset = AssetManager.GetNamedAsset("DoorMaterial");
         Asset StairAsset = AssetManager.GetNamedAsset("Stairs");
         Asset LavaAsset = AssetManager.GetNamedAsset("LavaMaterial");
         // Asset CheckpointAsset = AssetManager.GetNamedAsset("Checkpoint");
@@ -71,10 +72,11 @@ class Level : IEntityController
                 {
                     // newEntity = Scene.NewEntityFromPrefab("Start");
 
-                    mc.MeshAsset = AssetManager.GetNativeAsset("Cube");
+                    MeshComponent@ mc = newEntity.AddMeshComponent();
+                    mc.MeshSourceAsset = AssetManager.GetNativeAsset("Cube");
                     mc.MaterialAsset = StartAsset;
 
-                    Entity entity = Scene.GetEntity("Player");
+                    Entity entity = Scene.FindEntity("Player");
                     TransformComponent@ tr = entity.SetTransformComponent();
                     tr.Translation.x = tile.x;
                     tr.Translation.z = tile.y;
@@ -85,7 +87,7 @@ class Level : IEntityController
 
                     tc.Translation.y = 1;
                     MeshComponent@ mc = newEntity.AddMeshComponent();
-                    mc.MeshAsset = AssetManager.GetNativeAsset("Cube");
+                    mc.MeshSourceAsset = AssetManager.GetNativeAsset("Cube");
                     mc.MaterialAsset = WallAsset;
 
                     auto back = Tile(x, y - 1);
@@ -112,7 +114,7 @@ class Level : IEntityController
                     if(light.IsValid)
                     {
                         MeshComponent@ mc2 = light.AddMeshComponent();
-                        mc2.MeshAsset = TorchAsset;
+                        mc2.MeshSourceAsset = TorchAsset;
                     }
                 }
                 else if (IsPath(tile))
@@ -120,7 +122,7 @@ class Level : IEntityController
                     // newEntity = Scene.NewEntityFromPrefab("Path");
 
                     MeshComponent@ mc = newEntity.AddMeshComponent();
-                    mc.MeshAsset = AssetManager.GetNativeAsset("Cube");
+                    mc.MeshSourceAsset = AssetManager.GetNativeAsset("Cube");
                     mc.MaterialAsset = PathAsset;
                 }
                 else if (IsCode(tile))
@@ -128,23 +130,26 @@ class Level : IEntityController
                     // newEntity = Scene.NewEntityFromPrefab("Code");
 
                     MeshComponent@ mc = newEntity.AddMeshComponent();
-                    mc.MeshAsset = CodeAsset;
+                    mc.MeshSourceAsset = CodeAsset;
                 }
                 else if (IsLockedDoor(tile))
                 {
                     // newEntity = Scene.NewEntityFromPrefab("LockedDoor");
+                    tc.Scale = Vec3(0.5f);
 
                     MeshComponent@ mc = newEntity.AddMeshComponent();
-                    mc.MeshAsset = DoorAsset;
+                    // mc.MeshSourceAsset = DoorAsset;
+                    mc.MeshSourceAsset = AssetManager.GetNativeAsset("Cube");
+                    mc.MaterialAsset = DoorAsset;
 
                 }
                 else if (IsGoal(tile))
                 {
                     // newEntity = Scene.NewEntityFromPrefab("Goal");
 
-                    tc.Scale = Vec3(0.5f);
+                    tc.Scale = Vec3(0.1f);
                     MeshComponent@ mc = newEntity.AddMeshComponent();
-                    mc.MeshAsset = StairAsset;
+                    mc.MeshSourceAsset = StairAsset;
                 }
                 else if (IsLava(tile))
                 {
@@ -164,7 +169,7 @@ class Level : IEntityController
                     // newEntity = Scene.NewEntityFromPrefab("Checkpoint");
 
                     // MeshComponent@ mc = newEntity.AddMeshComponent();
-                    // mc.MeshAsset = CheckpointAsset;
+                    // mc.MeshSourceAsset = CheckpointAsset;
                 }
             }
         }
@@ -172,7 +177,7 @@ class Level : IEntityController
 
     void OnUpdate(float ts)
     {
-        LavaTimer.Tick(ts);
+        // LavaTimer.Tick(ts);
     }
 
     void LavaUpdate(float ts)
