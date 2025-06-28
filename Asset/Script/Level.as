@@ -86,36 +86,36 @@ class Level : IEntityController
                     // newEntity = Scene.NewEntityFromPrefab("Wall");
 
                     tc.Translation.y = 1;
-                    MeshComponent@ mc = newEntity.AddMeshComponent();
-                    mc.MeshSourceAsset = AssetManager.GetNativeAsset("Cube");
-                    mc.MaterialAsset = WallAsset;
+                    // MeshComponent@ mc = newEntity.AddMeshComponent();
+                    // mc.MeshSourceAsset = AssetManager.GetNativeAsset("Cube");
+                    // mc.MaterialAsset = WallAsset;
 
-                    auto back = Tile(x, y - 1);
-                    auto left = Tile(x - 1, y);
-                    auto right = Tile(x + 1, y);
-                    auto front = Tile(x, y + 1);
-                    Entity light;
-                    if(IsInbounds(front) and IsPath(front))
-                    {
-                        light = Scene.NewEntity();
-                        TransformComponent@ tc2 = light.AddTransformComponent();
-                        tc2.Translation.x = x;
-                        tc2.Translation.z = y;
-                        tc2.Scale = Vec3(0.5f);
+                    // auto back = Tile(x, y - 1);
+                    // auto left = Tile(x - 1, y);
+                    // auto right = Tile(x + 1, y);
+                    // auto front = Tile(x, y + 1);
+                    // Entity light;
+                    // if(IsInbounds(front) and IsPath(front))
+                    // {
+                    //     light = Scene.NewEntity();
+                    //     TransformComponent@ tc2 = light.AddTransformComponent();
+                    //     tc2.Translation.x = x;
+                    //     tc2.Translation.z = y;
+                    //     tc2.Scale = Vec3(0.5f);
 
-                        tc2.Rotation.x = radians(20.0f);
-                        tc2.Translation.z += 0.5f;
+                    //     tc2.Rotation.x = radians(20.0f);
+                    //     tc2.Translation.z += 0.5f;
 
-                        ParticleEmitterComponent@ pc = light.AddParticleEmitterComponent();
-                        pc.Position = Vec3(tile.x, 0.7f, tile.y + 0.5f);
-                        pc.MaxParticles = 50;
-                    }
+                    //     ParticleEmitterComponent@ pc = light.AddParticleEmitterComponent();
+                    //     pc.Position = Vec3(tile.x, 0.7f, tile.y + 0.5f);
+                    //     pc.MaxParticles = 50;
+                    // }
 
-                    if(light.IsValid)
-                    {
-                        MeshComponent@ mc2 = light.AddMeshComponent();
-                        mc2.MeshSourceAsset = TorchAsset;
-                    }
+                    // if(light.IsValid)
+                    // {
+                    //     MeshComponent@ mc2 = light.AddMeshComponent();
+                    //     mc2.MeshSourceAsset = TorchAsset;
+                    // }
                 }
                 else if (IsPath(tile))
                 {
@@ -128,6 +128,8 @@ class Level : IEntityController
                 else if (IsCode(tile))
                 {
                     // newEntity = Scene.NewEntityFromPrefab("Code");
+                    tc.Translation.y = 1;
+                    tc.Scale = Vec3(0.0011);
 
                     MeshComponent@ mc = newEntity.AddMeshComponent();
                     mc.MeshSourceAsset = CodeAsset;
@@ -135,19 +137,19 @@ class Level : IEntityController
                 else if (IsLockedDoor(tile))
                 {
                     // newEntity = Scene.NewEntityFromPrefab("LockedDoor");
-                    tc.Scale = Vec3(0.5f);
+                    // tc.Scale = Vec3(0.5f);
+                    tc.Translation.y = 1;
 
                     MeshComponent@ mc = newEntity.AddMeshComponent();
                     // mc.MeshSourceAsset = DoorAsset;
                     mc.MeshSourceAsset = AssetManager.GetNativeAsset("Cube");
                     mc.MaterialAsset = DoorAsset;
-
                 }
                 else if (IsGoal(tile))
                 {
                     // newEntity = Scene.NewEntityFromPrefab("Goal");
 
-                    tc.Scale = Vec3(0.1f);
+                    // tc.Scale = Vec3(0.1f);
                     MeshComponent@ mc = newEntity.AddMeshComponent();
                     mc.MeshSourceAsset = StairAsset;
                 }
@@ -158,11 +160,13 @@ class Level : IEntityController
                     // FluidMeshComponent@ fc = newEntity.AddFluidMeshComponent();
                     // fc.MaterialAsset = LavaAsset;
 
+                    tc.Translation.y = 1;
+
                     MeshComponent@ mc = newEntity.AddMeshComponent();
                     mc.MeshSourceAsset = AssetManager.GetNativeAsset("Cube");
                     mc.MaterialAsset = LavaAsset;
 
-                    LavaPoints.insertLast(tile);
+                    // LavaPoints.insertLast(tile);
                 }
                 else if (IsCheckpoint(tile))
                 {
@@ -244,7 +248,7 @@ class Level : IEntityController
     {
         return Grid.At(tile.x, tile.y) == 3;
     }
-    bool IsCode(const Tile& tile)
+    bool IsCode(const Tile& tile) const
     {
         return Grid.At(tile.x, tile.y) == 4;
     }

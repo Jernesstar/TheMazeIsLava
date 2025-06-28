@@ -36,6 +36,7 @@ AssetPack:
     - Asset:
         ID: 3853931722673808928
         Type: Mesh
+        Name: Code
         Path: Mesh/obelisk/obelisk.obj
     - Asset:
         ID: 4784818156094493288
@@ -142,6 +143,31 @@ AssetPack:
             - Uniform:
                 Name: u_Diffuse
                 Data: 4975861332934482515
+    - Asset:
+        ID: 10492020050375028496
+        Type: Material
+        Name: DoorMaterial
+        Material:
+          IntUniforms:
+            []
+          FloatUniforms:
+            []
+          Vec2Uniforms:
+            []
+          Vec3Uniforms:
+            []
+          Vec4Uniforms:
+            - Uniform:
+                Name: u_DiffuseColor
+                Data: [1, 0, 0, 1]
+          Mat2Uniforms:
+            []
+          Mat3Uniforms:
+            []
+          Mat4Uniforms:
+            []
+          TextureUniforms:
+            []
     - Asset:
         ID: 10652487024113119011
         Type: Mesh
