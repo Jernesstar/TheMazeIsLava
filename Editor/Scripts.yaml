@@ -1,2 +1,5 @@
 Scripts:
-  []
+  - Script:
+      Path: C:/Users/Jercy Mukala/Code/TheMazeIsLava/Asset/Script/Level.as
+      Breakpoints: []
+      Open: true

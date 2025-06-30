@@ -58,12 +58,11 @@ class Level : IEntityController
                 Tile tile;
                 tile.x = x;
                 tile.y = y;
-                Entity newEntity;
 
                 if(IsSpace(tile))
                     continue;
 
-                newEntity = Scene.NewEntity();
+                Entity newEntity = Scene.NewEntity();
                 TransformComponent@ tc = newEntity.AddTransformComponent();
                 tc.Translation.x = x;
                 tc.Translation.z = y;
@@ -86,9 +85,9 @@ class Level : IEntityController
                     // newEntity = Scene.NewEntityFromPrefab("Wall");
 
                     tc.Translation.y = 1;
-                    // MeshComponent@ mc = newEntity.AddMeshComponent();
-                    // mc.MeshSourceAsset = AssetManager.GetNativeAsset("Cube");
-                    // mc.MaterialAsset = WallAsset;
+                    MeshComponent@ mc = newEntity.AddMeshComponent();
+                    mc.MeshSourceAsset = AssetManager.GetNativeAsset("Cube");
+                    mc.MaterialAsset = WallAsset;
 
                     // auto back = Tile(x, y - 1);
                     // auto left = Tile(x - 1, y);
@@ -190,6 +189,8 @@ class Level : IEntityController
         for(uint32 i = 0; i < LavaPoints.length(); i++) {
             
         }
+
+        LavaPoints = lava;
     }
 
     void OnKeyEvent(KeyEvent@ event)
@@ -273,3 +274,4 @@ class Level : IEntityController
         return (tile.x < Grid.Width) && (tile.y < Grid.Height);
     }
 }
+
